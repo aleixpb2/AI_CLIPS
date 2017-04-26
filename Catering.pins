@@ -1,0 +1,32 @@
+; Wed Apr 26 19:07:56 CEST 2017
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([Catering_Class11] of  Bebida
+
+	(Nombre "Agua")
+	(Precio 1.0))
+
+([Catering_Class12] of  Bebida
+
+	(Nombre "Coca Cola")
+	(Precio 1.2))
+
+([Catering_Class3] of  Ingrediente
+
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Filete")
+	(TipoIngred Carne))
+
+([Catering_Class4] of  Ingrediente
+
+	(Estacion Verano)
+	(Nombre "Helado")
+	(TipoIngred Carne))
+
+([Catering_Class5] of  Ingrediente
+
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Pasta")
+	(TipoIngred Carne))
