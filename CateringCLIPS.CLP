@@ -1,4 +1,5 @@
-; Sun Apr 30 11:26:46 CEST 2017
+;; ONTOLOGIA
+; Sun Apr 30 00:40:04 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -130,15 +131,15 @@
 (defclass Evento
 	(is-a USER)
 	(role concrete)
-	(multislot Estacion
-		(type SYMBOL)
-		(allowed-values Primavera Verano Otono Invierno)
-		(cardinality 1 4)
-		(create-accessor read-write))
 	(single-slot NumComs
 		(type INTEGER)
 		(range 1 %3FVARIABLE)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot Estacion
+		(type SYMBOL)
+		(allowed-values Primavera Verano Otono Invierno)
+		(cardinality 1 4)
 		(create-accessor read-write))
 	(single-slot PrecioMin
 		(type FLOAT)
@@ -150,13 +151,13 @@
 ;+		(allowed-classes Menu)
 		(cardinality 3 3)
 		(create-accessor read-write))
+	(single-slot TipoEvento
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(single-slot PrecioMax
 		(type FLOAT)
 		(range 0.0 %3FVARIABLE)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot TipoEvento
-		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -198,20 +199,20 @@
 		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot Estacion
-		(type SYMBOL)
-		(allowed-values Primavera Verano Otono Invierno)
-		(cardinality 1 4)
+	(multislot PlatosCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Plato)
+		(cardinality 2 ?VARIABLE)
 		(create-accessor read-write))
 	(single-slot Complejo
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot PlatosCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-		(cardinality 2 ?VARIABLE)
+	(multislot Estacion
+		(type SYMBOL)
+		(allowed-values Primavera Verano Otono Invierno)
+		(cardinality 1 4)
 		(create-accessor read-write))
 	(single-slot TipoPlato
 		(type STRING)
@@ -236,13 +237,13 @@
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Sibarita
+	(single-slot Clasico
+;+		(comment "Clasico/Moderno")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Clasico
-;+		(comment "Clasico/Moderno")
+	(single-slot Sibarita
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 1 1)
@@ -266,13 +267,13 @@
 (defclass Bebida
 	(is-a USER)
 	(role concrete)
-	(single-slot Nombre
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot Precio
 		(type FLOAT)
 		(range 0.0 %3FVARIABLE)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Nombre
+		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -293,3 +294,50 @@
 		(allowed-values Carne Pescado Vegetal)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; INSTANCIAS
+
+(definstances instancias
+
+; Sun Apr 30 00:40:04 CEST 2017
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([Catering_Class11] of  Bebida
+
+	(Nombre "Agua")
+	(Precio 1.0))
+
+([Catering_Class12] of  Bebida
+
+	(Nombre "Coca Cola")
+	(Precio 1.2))
+
+([Catering_Class3] of  Ingrediente
+
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Filete")
+	(TipoIngred Carne))
+
+([Catering_Class4] of  Ingrediente
+
+	(Estacion Verano)
+	(Nombre "Helado")
+	(TipoIngred Carne))
+
+([Catering_Class5] of  Ingrediente
+
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Pasta")
+	(TipoIngred Carne))
+)
+
+;;;;;;;;;;; CODIGO CLIPS  ;;;;;;;;;;;;;
+
+(defrule retorna_instancies
+  (not retorna_instancies ok)
+   =>
+  (bind ?llista_instancies (find-all-instances ((?instancia Bebida)) TRUE))
+  (assert retorna_instancies ok)
+)
