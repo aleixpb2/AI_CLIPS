@@ -1,4 +1,4 @@
-; Sun Apr 30 11:26:46 CEST 2017
+; Wed May 03 18:00:39 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -32,11 +32,11 @@
 		(create-accessor read-write))
 	(single-slot NumComs
 		(type INTEGER)
-		(range 1 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot TipoEvento
-		(type STRING)
+		(type SYMBOL)
+		(allowed-values Familiar_comida Familiar_cena Congreso_comida Congreso_cena)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Complejo
@@ -62,12 +62,10 @@
 		(create-accessor read-write))
 	(single-slot PrecioMin
 		(type FLOAT)
-		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Precio
 		(type FLOAT)
-		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Sibarita
@@ -82,7 +80,6 @@
 		(create-accessor read-write))
 	(single-slot PrecioMax
 		(type FLOAT)
-		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot PlatosCompatibles
@@ -93,7 +90,6 @@
 	(single-slot PrecioMenu
 ;+		(comment "Valor calculado")
 		(type FLOAT)
-		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot BebidasCompatibles
@@ -137,12 +133,10 @@
 		(create-accessor read-write))
 	(single-slot NumComs
 		(type INTEGER)
-		(range 1 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot PrecioMin
 		(type FLOAT)
-		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot MenusEvento
@@ -152,11 +146,11 @@
 		(create-accessor read-write))
 	(single-slot PrecioMax
 		(type FLOAT)
-		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot TipoEvento
-		(type STRING)
+		(type SYMBOL)
+		(allowed-values Familiar_comida Familiar_cena Congreso_comida Congreso_cena)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -171,7 +165,6 @@
 	(single-slot PrecioMenu
 ;+		(comment "Valor calculado")
 		(type FLOAT)
-		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot PostreMenu
@@ -195,7 +188,6 @@
 	(role concrete)
 	(single-slot Precio
 		(type FLOAT)
-		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot Estacion
@@ -272,7 +264,6 @@
 		(create-accessor read-write))
 	(single-slot Precio
 		(type FLOAT)
-		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
