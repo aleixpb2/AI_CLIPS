@@ -363,7 +363,7 @@
 ; SALIENCE = 10
 
 (defrule preguntar-tipo-evento
- (declare (salience 20))
+ (declare (salience 10))
  =>
  (if (esComida "¿Es una comida o una cena?")
   then (if (esFamiliar "¿Es un evento familiar o un congreso?")
@@ -378,7 +378,7 @@
 )
 
 (defrule preguntar-estacion
- (declare (salience 15))
+ (declare (salience 10))
  =>
  (printout t "¿En qué estación será el evento?" crlf)
  (printout t "Primavera" crlf)
@@ -390,7 +390,7 @@
 )
 
 (defrule preguntar-comensales
- (declare (salience 31)) ;10
+ (declare (salience 10))
  =>
  (printout t "¿Cuantos comensales?")
  (bind ?numComs (read))
@@ -398,7 +398,7 @@
 )
 
 (defrule preguntar-precio-max
- (declare (salience 8))
+ (declare (salience 10))
  =>
  (printout t "¿Cual es el maximo presupuesto por persona?")
  (bind ?precioMax (read))
@@ -406,7 +406,7 @@
 )
 
 (defrule preguntar-precio-min
- (declare (salience 7))
+ (declare (salience 10))
  =>
  (printout t "¿Cual es el minimo presupuesto por persona?")
  (bind ?precioMin (read))
@@ -426,19 +426,26 @@
    (assert (complejo))
 )
 
-(defrule multiplesBebidas
-   (complejo)
-   =>
-   (assert (multiplesBebidas))
-)
+;;; Comented for the prototype
+; (defrule multiplesBebidas
+   ; (complejo)
+   ; =>
+   ; (assert (multiplesBebidas))
+; )
 
 ;;;;;;;;;; FINAL ;;;;;;;;;;;;;;;;
-; SALIENCE < 0
+; SALIENCE -10
 
 (defrule getMenu
-	(declare (salience 40))
-	=>
-	(bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE )) ;;;(> (?inst:Precio) 0)	
-	(printout t ?bebidas)	
+    (declare (salience -10))
+
+
 )
+
+; (defrule getBebidas
+	; (declare (salience 40))
+	; =>
+	; (bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE )) ;;;(> (?inst:Precio) 0)	
+	; (printout t ?bebidas)	
+; )
 
