@@ -1,5 +1,6 @@
-;; ONTOLOGIA
-; Wed May 03 18:00:39 CEST 2017
+;;;; ONTOLOGIA
+
+; Sun May 07 14:59:20 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -14,8 +15,9 @@
 		(cardinality 1 4)
 		(create-accessor read-write))
 	(single-slot TipoPlato
+;+		(comment "Por ahora no requerido")
 		(type STRING)
-;+		(cardinality 1 1)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot LugarPlato
 ;+		(comment "Lugar donde el plato es tipico en caso de que lo sea")
@@ -35,6 +37,11 @@
 		(type INTEGER)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(single-slot Alcoholica
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot TipoEvento
 		(type SYMBOL)
 		(allowed-values Familiar_comida Familiar_cena Congreso_comida Congreso_cena)
@@ -43,60 +50,72 @@
 	(single-slot Complejo
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot TipoIngred
 		(type SYMBOL)
 		(allowed-values Carne Pescado Vegetal)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(single-slot Ligero
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(multislot IngredientesPlato
 		(type INSTANCE)
-;+		(allowed-classes Ingrediente)
+;+		(allowed-classes)
 		(cardinality 1 ?VARIABLE)
 		(create-accessor read-write))
 	(single-slot Clasico
 ;+		(comment "Clasico/Moderno")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot PrecioMin
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(single-slot Catering_Class0
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot Precio
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(multislot PlatosNoCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Plato)
+		(create-accessor read-write))
+	(multislot BebidasNoCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Bebida)
+		(create-accessor read-write))
 	(single-slot Sibarita
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Caliente
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot PrecioMax
 		(type FLOAT)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot PlatosCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-		(cardinality 2 ?VARIABLE)
 		(create-accessor read-write))
 	(single-slot PrecioMenu
 ;+		(comment "Valor calculado")
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot BebidasCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Bebida)
-		(cardinality 1 ?VARIABLE)
+	(single-slot Vegetariano
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot SegundoPlatoMenu
 		(type INSTANCE)
@@ -127,14 +146,14 @@
 (defclass Evento
 	(is-a USER)
 	(role concrete)
+	(single-slot NumComs
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(multislot Estacion
 		(type SYMBOL)
 		(allowed-values Primavera Verano Otono Invierno)
 		(cardinality 1 4)
-		(create-accessor read-write))
-	(single-slot NumComs
-		(type INTEGER)
-;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot PrecioMin
 		(type FLOAT)
@@ -145,13 +164,13 @@
 ;+		(allowed-classes Menu)
 		(cardinality 3 3)
 		(create-accessor read-write))
-	(single-slot PrecioMax
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot TipoEvento
 		(type SYMBOL)
 		(allowed-values Familiar_comida Familiar_cena Congreso_comida Congreso_cena)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot PrecioMax
+		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -191,59 +210,63 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(single-slot Complejo
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(multislot Estacion
 		(type SYMBOL)
 		(allowed-values Primavera Verano Otono Invierno)
 		(cardinality 1 4)
 		(create-accessor read-write))
-	(single-slot Complejo
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
+	(single-slot TipoPlato
+;+		(comment "Por ahora no requerido")
+		(type STRING)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot PlatosCompatibles
+	(multislot PlatosNoCompatibles
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
-		(cardinality 2 ?VARIABLE)
 		(create-accessor read-write))
-	(single-slot TipoPlato
-		(type STRING)
-;+		(cardinality 1 1)
+	(single-slot Ligero
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot LugarPlato
 ;+		(comment "Lugar donde el plato es tipico en caso de que lo sea")
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot BebidasCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Bebida)
-		(cardinality 1 ?VARIABLE)
-		(create-accessor read-write))
-	(multislot IngredientesPlato
-		(type INSTANCE)
-;+		(allowed-classes Ingrediente)
-		(cardinality 1 ?VARIABLE)
+	(single-slot Vegetariano
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Nombre
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Sibarita
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
+	(multislot BebidasNoCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Bebida)
 		(create-accessor read-write))
 	(single-slot Clasico
 ;+		(comment "Clasico/Moderno")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Sibarita
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Caliente
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot BebidaAsociada
 		(type INSTANCE)
@@ -259,37 +282,26 @@
 (defclass Bebida
 	(is-a USER)
 	(role concrete)
-	(single-slot Nombre
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot Precio
 		(type FLOAT)
 ;+		(cardinality 1 1)
-		(create-accessor read-write)))
-
-(defclass Ingrediente
-	(is-a USER)
-	(role concrete)
+		(create-accessor read-write))
 	(single-slot Nombre
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot Estacion
+	(single-slot Alcoholica
 		(type SYMBOL)
-		(allowed-values Primavera Verano Otono Invierno)
-		(cardinality 1 4)
-		(create-accessor read-write))
-	(single-slot TipoIngred
-		(type SYMBOL)
-		(allowed-values Carne Pescado Vegetal)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))    
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; INSTANCIAS
 
 (definstances instancias 
-; Wed May 03 17:19:19 CEST 2017
+
+
+; Sun May 07 14:59:20 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -304,23 +316,64 @@
 	(Nombre "Coca Cola")
 	(Precio 1.2))
 
-([Catering_Class3] of  Ingrediente
+([Catering_Class4] of  Bebida
 
+	(Alcoholica TRUE)
+	(Nombre "Vino")
+	(Precio 3.5))
+
+([Catering_Class5] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Nombre "Filete")
-	(TipoIngred Carne))
+	(OrdenPlato Segundo)
+	(Precio 7.0))
 
-([Catering_Class4] of  Ingrediente
+([Catering_Class6] of  Plato
 
-	(Estacion Verano)
-	(Nombre "Helado")
-	(TipoIngred Carne))
+	(Caliente TRUE)
+	(Clasico FALSE)
+	(Complejo TRUE)
+	(Estacion Primavera Otono Invierno)
+	(Nombre "Risoto")
+	(OrdenPlato Primero)
+	(Precio 8.0)
+	(Vegetariano TRUE))
 
-([Catering_Class5] of  Ingrediente
+([Catering_Class7] of  Plato
 
+	(Caliente TRUE)
+	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
-	(Nombre "Pasta")
-	(TipoIngred Carne))
+	(Nombre "Pizza 4 quesos")
+	(OrdenPlato Primero Segundo)
+	(Precio 5.0)
+	(Vegetariano TRUE))
+
+([Catering_Class8] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Verano Primavera)
+	(Ligero TRUE)
+	(Nombre "Helado de sabores")
+	(OrdenPlato Postre)
+	(Precio 2.0)
+	(Sibarita FALSE)
+	(Vegetariano TRUE))
+
+([Catering_Class9] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Macarrones con pesto")
+	(OrdenPlato Primero)
+	(Precio 6.0)
+	(Vegetariano TRUE))
+
+
 	
 	)
 ;;;;;;;;;;; CODIGO CLIPS  ;;;;;;;;;;;;;
@@ -342,22 +395,24 @@
    ?answer)
 
 (deffunction yes-or-no-p (?question)
-   (bind ?response (ask-question ?question yes no y n))
-   (if (or (eq ?response yes) (eq ?response y))
+   (bind ?response (ask-question ?question Si si No no S s N n))
+   (if (or (eq ?response Si) (eq ?response si) (eq ?response S) (eq ?response s))
        then TRUE 
        else FALSE))
 	   
 (deffunction esComida (?question)
-   (bind ?response (ask-question ?question comida cena))
-   (if (eq ?response Comida)
+   (bind ?response (ask-question ?question Comida comida Cena cena))
+   (if (or (eq ?response Comida) (eq ?response comida))
        then TRUE 
-       else FALSE))
+       else FALSE)
+)
 	   
 (deffunction esFamiliar (?question)
-   (bind ?response (ask-question ?question familiar congreso))
-   (if (eq ?response Familiar)
+   (bind ?response (ask-question ?question Familiar familiar Congreso congreso))
+   (if (or (eq ?response Familiar) (eq ?response familiar))
        then TRUE 
-       else FALSE))
+       else FALSE)
+)
 	   
 ;;;;;;;;;;;;;;  QUERIES ;;;;;;;;;;;;;;;;
 ; SALIENCE = 10
@@ -413,18 +468,42 @@
  (assert (precioMin ?precioMin)) 
 )
 
+(defrule preguntar-vegetariano
+ (declare (salience 10))
+ =>
+ (if (yes-or-no-p "¿Quieres un menu vegetariano?")
+ then (assert (vegetariano si))
+ else (assert (vegetariano no)) 
+ )
+ )
+
 ;;;;;;;;;;;;; CONCLUSIONS ;;;;;;;;;;;;;;
 ; NO SALIENCE
 ; DEFAULTS:
 ; simple
-; una bebida
-;
+;;;;;;;;; una bebida
+; denso
+; no vegetariano
 
 (defrule complejidad
-   (numComs ?nC &:(> ?nC 50))
+   (numComs ?nC)
    =>
-   (assert (complejo))
+   (if (< ?nC 50)
+   then (assert (complejo si))
+   else (assert (complejo no))
+   )
 )
+
+(defrule ligereza
+   (tipoEvento ?te)
+   =>
+   (if(or ( eq ?te Familiar_cena) (eq ?te Congreso_cena) )
+   then (assert (ligero si))
+   else (assert (ligero no))
+   )
+)
+
+
 
 ;;; Comented for the prototype
 ; (defrule multiplesBebidas
@@ -436,11 +515,39 @@
 ;;;;;;;;;; FINAL ;;;;;;;;;;;;;;;;
 ; SALIENCE -10
 
-(defrule getMenu
-    (declare (salience -10))
-
+(defrule getMenus
+   (declare (salience -10))
+   (complejo ?c)
+   (ligero ?l)
+   (vegetariano ?v)
+   =>
+   (if (eq ?c si)
+    then (bind ?bebidas (find-all-instances ((?inst Bebida)) (eq ?inst:Alcoholica TRUE) ))
+    else (bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE ))
+    )
+    
+    (if (eq ?l si)
+    then 
+        (if (eq ?v si)
+          then (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero TRUE) (eq ?inst:Vegetariano TRUE) )))
+          else (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Ligero TRUE) ))
+        ) 
+    else(
+        if (eq ?v si)
+        then (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero FALSE) (eq ?inst:Vegetariano TRUE) )))
+        else (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Ligero FALSE) ))
+        )
+    )    
+    
+    
+       
+   (printout t ?bebidas)
+   (printout t ?platos)   
 
 )
+
+
+
 
 ; (defrule getBebidas
 	; (declare (salience 40))

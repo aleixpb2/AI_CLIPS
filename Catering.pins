@@ -1,4 +1,4 @@
-; Wed May 03 18:00:39 CEST 2017
+; Sun May 07 14:59:20 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -13,20 +13,59 @@
 	(Nombre "Coca Cola")
 	(Precio 1.2))
 
-([Catering_Class3] of  Ingrediente
+([Catering_Class4] of  Bebida
 
+	(Alcoholica TRUE)
+	(Nombre "Vino")
+	(Precio 3.5))
+
+([Catering_Class5] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Nombre "Filete")
-	(TipoIngred Carne))
+	(OrdenPlato Segundo)
+	(Precio 7.0))
 
-([Catering_Class4] of  Ingrediente
+([Catering_Class6] of  Plato
 
-	(Estacion Verano)
-	(Nombre "Helado")
-	(TipoIngred Carne))
+	(Caliente TRUE)
+	(Clasico FALSE)
+	(Complejo TRUE)
+	(Estacion Primavera Otono Invierno)
+	(Nombre "Risoto")
+	(OrdenPlato Primero)
+	(Precio 8.0)
+	(Vegetariano TRUE))
 
-([Catering_Class5] of  Ingrediente
+([Catering_Class7] of  Plato
 
+	(Caliente TRUE)
+	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
-	(Nombre "Pasta")
-	(TipoIngred Carne))
+	(Nombre "Pizza 4 quesos")
+	(OrdenPlato Primero Segundo)
+	(Precio 5.0)
+	(Vegetariano TRUE))
+
+([Catering_Class8] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Verano Primavera)
+	(Ligero TRUE)
+	(Nombre "Helado de sabores")
+	(OrdenPlato Postre)
+	(Precio 2.0)
+	(Sibarita FALSE)
+	(Vegetariano TRUE))
+
+([Catering_Class9] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Macarrones con pesto")
+	(OrdenPlato Primero)
+	(Precio 6.0)
+	(Vegetariano TRUE))
