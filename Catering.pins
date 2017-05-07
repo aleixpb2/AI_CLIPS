@@ -1,7 +1,84 @@
-; Sun May 07 14:59:20 CEST 2017
+; Sun May 07 18:26:37 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
+
+([Catering_Class10000] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Ensalada")
+	(OrdenPlato Primero)
+	(Precio 4.0)
+	(Vegetariano TRUE))
+
+([Catering_Class10001] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Tortilla de patatas")
+	(OrdenPlato Segundo)
+	(Precio 6.0)
+	(Vegetariano TRUE))
+
+([Catering_Class10002] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Estofado")
+	(OrdenPlato Segundo)
+	(Precio 10.0))
+
+([Catering_Class10003] of  Plato
+
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Hamburguesa de tofu")
+	(OrdenPlato Segundo)
+	(Precio 8.0)
+	(Vegetariano TRUE))
+
+([Catering_Class10004] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Verano Primavera Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Flan")
+	(OrdenPlato Postre)
+	(Precio 3.0)
+	(Sibarita FALSE)
+	(Vegetariano TRUE))
+
+([Catering_Class10005] of  Plato
+
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Verano Primavera Otono Invierno)
+	(Ligero FALSE)
+	(Nombre "Pastel de queso")
+	(OrdenPlato Postre)
+	(Precio 9.0)
+	(Sibarita FALSE)
+	(Vegetariano TRUE))
+
+([Catering_Class10006] of  Plato
+
+	(Caliente TRUE)
+	(Clasico FALSE)
+	(Complejo TRUE)
+	(Estacion Verano Primavera Otono Invierno)
+	(Ligero FALSE)
+	(Nombre "Couland de chocolate")
+	(OrdenPlato Postre)
+	(Precio 9.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
 
 ([Catering_Class11] of  Bebida
 
