@@ -1,5 +1,11 @@
 ;;;; ONTOLOGIA
 
+; Wed May 10 18:20:34 CEST 2017
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
@@ -128,73 +134,13 @@
 		(create-accessor read-write))
 	(multislot MenusEvento
 		(type INSTANCE)
-;+		(allowed-classes Menu)
+;+		(allowed-classes)
 		(cardinality 3 3)
 		(create-accessor read-write))
 	(multislot OrdenPlato
 		(type SYMBOL)
 		(allowed-values Primero Segundo Postre)
 		(cardinality 1 3)
-		(create-accessor read-write)))
-
-(defclass Evento
-	(is-a USER)
-	(role concrete)
-	(single-slot NumComs
-		(type INTEGER)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot Estacion
-		(type SYMBOL)
-		(allowed-values Primavera Verano Otono Invierno)
-		(cardinality 1 4)
-		(create-accessor read-write))
-	(single-slot PrecioMin
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot MenusEvento
-		(type INSTANCE)
-;+		(allowed-classes Menu)
-		(cardinality 3 3)
-		(create-accessor read-write))
-	(single-slot TipoEvento
-		(type SYMBOL)
-		(allowed-values Familiar_comida Familiar_cena Congreso_comida Congreso_cena)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot PrecioMax
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
-
-(defclass Menu
-	(is-a USER)
-	(role concrete)
-	(single-slot SegundoPlatoMenu
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot PrecioMenu
-;+		(comment "Valor calculado")
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot PostreMenu
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot BebidaAsociada
-		(type INSTANCE)
-;+		(allowed-classes Bebida)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot PrimerPlatoMenu
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Plato
@@ -293,6 +239,11 @@
 ;; INSTANCIAS
 
 (definstances instancias 
+
+; Wed May 10 18:20:34 CEST 2017
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
 
 ([Catering_Class10000] of  Plato
 
@@ -501,8 +452,8 @@
    (return ?ins)
 )
 
-(deffunction calculoPrecios (?p1 ?p2 ?p3)
-	(bind ?precio (+ (send ?p1 get-Precio) (send ?p2 get-Precio) (send ?p3 get-Precio)))
+(deffunction calcularPrecio (?p1 ?p2 ?p3 ?b)
+	(bind ?precio (+ (send ?p1 get-Precio) (send ?p2 get-Precio) (send ?p3 get-Precio) (send ?b get-Precio)))
 )      
 
 (deffunction getMenu (?nMenu ?c ?l ?v)
@@ -567,7 +518,7 @@
    (bind ?postre (random-elem ?postres) ) 
    (printout t (send ?postre get-Nombre) crlf)
    (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?bebida)))
-   (printout t (calculoPrecios ?primero ?segundo ?postre))
+   (printout t (calcularPrecio ?primero ?segundo ?postre ?bebida))
    ;(bind ?precio (send ?postre get-Precio))
    ;(printout t ?precio)
   )

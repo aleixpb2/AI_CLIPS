@@ -1,4 +1,4 @@
-; Wed May 10 17:23:36 CEST 2017
+; Wed May 10 18:30:44 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -132,73 +132,13 @@
 		(create-accessor read-write))
 	(multislot MenusEvento
 		(type INSTANCE)
-;+		(allowed-classes Menu)
+;+		(allowed-classes)
 		(cardinality 3 3)
 		(create-accessor read-write))
 	(multislot OrdenPlato
 		(type SYMBOL)
 		(allowed-values Primero Segundo Postre)
 		(cardinality 1 3)
-		(create-accessor read-write)))
-
-(defclass Evento
-	(is-a USER)
-	(role concrete)
-	(single-slot NumComs
-		(type INTEGER)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot Estacion
-		(type SYMBOL)
-		(allowed-values Primavera Verano Otono Invierno)
-		(cardinality 1 4)
-		(create-accessor read-write))
-	(single-slot PrecioMin
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot MenusEvento
-		(type INSTANCE)
-;+		(allowed-classes Menu)
-		(cardinality 3 3)
-		(create-accessor read-write))
-	(single-slot TipoEvento
-		(type SYMBOL)
-		(allowed-values Familiar_comida Familiar_cena Congreso_comida Congreso_cena)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot PrecioMax
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
-
-(defclass Menu
-	(is-a USER)
-	(role concrete)
-	(single-slot SegundoPlatoMenu
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot PrecioMenu
-;+		(comment "Valor calculado")
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot PostreMenu
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot BebidaAsociada
-		(type INSTANCE)
-;+		(allowed-classes Bebida)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot PrimerPlatoMenu
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Plato
