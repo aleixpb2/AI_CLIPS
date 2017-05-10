@@ -1,4 +1,4 @@
-; Sun May 07 18:26:37 CEST 2017
+; Wed May 10 17:23:36 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -123,6 +123,7 @@
 	(Estacion Primavera Verano Otono Invierno)
 	(Nombre "Pizza 4 quesos")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class7])
 	(Precio 5.0)
 	(Vegetariano TRUE))
 

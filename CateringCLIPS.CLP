@@ -1,11 +1,5 @@
 ;;;; ONTOLOGIA
 
-; Sun May 07 18:26:37 CEST 2017
-; 
-;+ (version "3.5")
-;+ (build "Build 663")
-
-
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
@@ -146,14 +140,14 @@
 (defclass Evento
 	(is-a USER)
 	(role concrete)
+	(single-slot NumComs
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(multislot Estacion
 		(type SYMBOL)
 		(allowed-values Primavera Verano Otono Invierno)
 		(cardinality 1 4)
-		(create-accessor read-write))
-	(single-slot NumComs
-		(type INTEGER)
-;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot PrecioMin
 		(type FLOAT)
@@ -164,13 +158,13 @@
 ;+		(allowed-classes Menu)
 		(cardinality 3 3)
 		(create-accessor read-write))
-	(single-slot PrecioMax
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot TipoEvento
 		(type SYMBOL)
 		(allowed-values Familiar_comida Familiar_cena Congreso_comida Congreso_cena)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot PrecioMax
+		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -210,24 +204,24 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot Estacion
-		(type SYMBOL)
-		(allowed-values Primavera Verano Otono Invierno)
-		(cardinality 1 4)
-		(create-accessor read-write))
 	(single-slot Complejo
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot PlatosNoCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Plato)
+	(multislot Estacion
+		(type SYMBOL)
+		(allowed-values Primavera Verano Otono Invierno)
+		(cardinality 1 4)
 		(create-accessor read-write))
 	(single-slot TipoPlato
 ;+		(comment "Por ahora no requerido")
 		(type STRING)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot PlatosNoCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Plato)
 		(create-accessor read-write))
 	(single-slot Ligero
 		(type SYMBOL)
@@ -244,21 +238,21 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot BebidasNoCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Bebida)
-		(create-accessor read-write))
 	(single-slot Nombre
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Sibarita
+	(multislot BebidasNoCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Bebida)
+		(create-accessor read-write))
+	(single-slot Clasico
+;+		(comment "Clasico/Moderno")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Clasico
-;+		(comment "Clasico/Moderno")
+	(single-slot Sibarita
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
@@ -282,12 +276,12 @@
 (defclass Bebida
 	(is-a USER)
 	(role concrete)
-	(single-slot Nombre
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot Precio
 		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Nombre
+		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Alcoholica
@@ -295,18 +289,10 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
-
-    
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; INSTANCIAS
 
 (definstances instancias 
-
-
-; Sun May 07 18:26:37 CEST 2017
-; 
-;+ (version "3.5")
-;+ (build "Build 663")
 
 ([Catering_Class10000] of  Plato
 
@@ -428,6 +414,7 @@
 	(Estacion Primavera Verano Otono Invierno)
 	(Nombre "Pizza 4 quesos")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class7])
 	(Precio 5.0)
 	(Vegetariano TRUE))
 
@@ -459,9 +446,21 @@
 ;;;;;;;;;;; CODIGO CLIPS  ;;;;;;;;;;;;;
 
 ;;****************
+;;* DEFTEMPLATES *
+;;**************** 
+;numMenu1 = barat
+;numMenu2 = intermig
+;numMenu3 = car
+(deftemplate menu
+	(slot numMenu (type INTEGER))
+	(slot primer-plato)
+	(slot segundo-plato)
+	(slot postre)
+	(multislot lista-bebidas))
+	
+;;****************
 ;;* DEFFUNCTIONS *
 ;;****************
-
 (deffunction ask-question (?question $?allowed-values)
    (printout t ?question)
    (bind ?answer (read))
@@ -493,8 +492,7 @@
        then TRUE 
        else FALSE)
 )
-	   
-       
+
 (deffunction random-elem ( ?li )
    ;(bind ?li (create$ ?li))
    (bind ?max (length ?li))
@@ -502,7 +500,78 @@
    (bind ?ins (nth$ ?r ?li))
    (return ?ins)
 )
-      
+
+(deffunction calculoPrecios (?p1 ?p2 ?p3)
+	(bind ?precio (+ (send ?p1 get-Precio) (send ?p2 get-Precio) (send ?p3 get-Precio)))
+)      
+
+(deffunction getMenu (?nMenu ?c ?l ?v)
+   (if (eq ?c si) ; si complejo (poca gente) cualquier bebida
+    then (bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE ))
+    ; si no complejo (mucha gente) no alcoholicas
+    else (bind ?bebidas (find-all-instances ((?inst Bebida)) (not (eq ?inst:Alcoholica TRUE)) ))
+    )
+    
+    (if (eq ?l si)
+    then 
+        (if (eq ?v si)
+          then (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero TRUE) (eq ?inst:Vegetariano TRUE) )))
+          else (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Ligero TRUE) ))
+        ) 
+    else(
+        if (eq ?v si)
+        then (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Vegetariano TRUE) ))
+        else (bind ?platos (find-all-instances ((?inst Plato)) TRUE ))
+        )
+    )
+    
+   (printout t crlf)
+   (printout t "Menú " ?nMenu crlf)
+   (printout t "Bebida: " )
+   (bind ?bebida (random-elem ?bebidas) )   
+   (printout t (send ?bebida get-Nombre) crlf)
+   
+   (bind ?primeros (create$ ))   
+   (loop-for-count (?i 1 (length ?platos))     
+      (bind ?var (nth$ ?i ?platos))
+      (bind ?ordenes (send ?var get-OrdenPlato))
+      (if ( member Primero ?ordenes)
+       then (bind ?primeros (insert$ ?primeros 1 ?var))
+      )
+   )   
+   (printout t "Primero: " )
+   (bind ?primero (random-elem ?primeros) ) 
+   (printout t (send ?primero get-Nombre) crlf)   
+   
+   (bind ?segundos (create$ ))   
+   (loop-for-count (?i 1 (length ?platos))     
+      (bind ?var (nth$ ?i ?platos))
+      (bind ?ordenes (send ?var get-OrdenPlato))
+      (if ( member Segundo ?ordenes)
+       then (bind ?segundos (insert$ ?segundos 1 ?var))
+      )
+   )   
+   (printout t "Segundo: " )
+   (bind ?segundo (random-elem ?segundos) ) 
+   (printout t (send ?segundo get-Nombre) crlf)
+   
+   (bind ?postres (create$ ))   
+   (loop-for-count (?i 1 (length ?platos))     
+      (bind ?var (nth$ ?i ?platos))
+      (bind ?ordenes (send ?var get-OrdenPlato))
+      (if ( member Postre ?ordenes)
+       then (bind ?postres (insert$ ?postres 1 ?var))
+      )
+   )   
+   (printout t "Postre: " )
+   (bind ?postre (random-elem ?postres) ) 
+   (printout t (send ?postre get-Nombre) crlf)
+   (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?bebida)))
+   (printout t (calculoPrecios ?primero ?segundo ?postre))
+   ;(bind ?precio (send ?postre get-Precio))
+   ;(printout t ?precio)
+  )
+
 ;;;;;;;;;;;;;;  QUERIES ;;;;;;;;;;;;;;;;
 ; SALIENCE = 10
 
@@ -601,123 +670,25 @@
    ; (assert (multiplesBebidas))
 ; )
 
+
 ;;;;;;;;;; FINAL ;;;;;;;;;;;;;;;;
 ; SALIENCE -10
+;(defglobal <var>)
+; Preus dels menus:
+; Barat -> sum(plats >= minim)
+; Intermig -> sum (plats >= minim <= maxim)
+; Car ->  sum (plats <= maxim)
 
 (defrule getMenus
    (declare (salience -10))
    (complejo ?c)
    (ligero ?l)
    (vegetariano ?v)
-   =>
-   (if (eq ?c si) ; si complejo (poca gente) cualquier bebida
-    then (bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE ))
-    ; si no complejo (mucha gente) no alcoholicas
-    else (bind ?bebidas (find-all-instances ((?inst Bebida)) (not (eq ?inst:Alcoholica TRUE)) ))
-    )
-    
-    (if (eq ?l si)
-    then 
-        (if (eq ?v si)
-          then (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero TRUE) (eq ?inst:Vegetariano TRUE) )))
-          else (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Ligero TRUE) ))
-        ) 
-    else(
-        if (eq ?v si)
-        then (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Vegetariano TRUE) ))
-        else (bind ?platos (find-all-instances ((?inst Plato)) TRUE ))
-        )
-    )
-    
-   (printout t "Menús:" crlf) 
-   (printout t crlf)
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   (printout t "Menú 1:")
-   (printout t "Bebida: " )
-   (bind ?bebida (random-elem ?bebidas) )   
-   (printout t (send ?bebida get-Nombre) crlf)
-   
-   (bind ?primeros (create$ ))   
-   (loop-for-count (?i 1 (length ?platos))     
-      (bind ?var (nth$ ?i ?platos))
-      (bind ?ordenes (send ?var get-OrdenPlato))
-      (if ( member Primero ?ordenes)
-       then (bind ?primeros (insert$ ?primeros 1 (send ?var get-Nombre)))
-      )
-   )   
-   (printout t "Primero: " )
-   (bind ?primero (random-elem ?primeros) ) 
-   (printout t ?primero crlf)   
-   
-   (bind ?segundos (create$ ))   
-   (loop-for-count (?i 1 (length ?platos))     
-      (bind ?var (nth$ ?i ?platos))
-      (bind ?ordenes (send ?var get-OrdenPlato))
-      (if ( member Segundo ?ordenes)
-       then (bind ?segundos (insert$ ?segundos 1 (send ?var get-Nombre)))
-      )
-   )   
-   (printout t "Segundo: " )
-   (bind ?segundo (random-elem ?segundos) ) 
-   (printout t ?segundo crlf)
-   
-   (bind ?postres (create$ ))   
-   (loop-for-count (?i 1 (length ?platos))     
-      (bind ?var (nth$ ?i ?platos))
-      (bind ?ordenes (send ?var get-OrdenPlato))
-      (if ( member Postre ?ordenes)
-       then (bind ?postres (insert$ ?postres 1 (send ?var get-Nombre)))
-      )
-   )   
-   (printout t "Postre: " )
-   (bind ?postre (random-elem ?postres) ) 
-   (printout t ?postre crlf)
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   (printout t "Menú 2:")
-   (printout t "Bebida: " )
-   (bind ?bebida (random-elem ?bebidas) )   
-   (printout t (send ?bebida get-Nombre) crlf)
-   
-   (bind ?primeros (create$ ))   
-   (loop-for-count (?i 1 (length ?platos))     
-      (bind ?var (nth$ ?i ?platos))
-      (bind ?ordenes (send ?var get-OrdenPlato))
-      (if ( member Primero ?ordenes)
-       then (bind ?primeros (insert$ ?primeros 1 (send ?var get-Nombre)))
-      )
-   )   
-   (printout t "Primero: " )
-   (bind ?primero (random-elem ?primeros) ) 
-   (printout t ?primero crlf)   
-   
-   (bind ?segundos (create$ ))   
-   (loop-for-count (?i 1 (length ?platos))     
-      (bind ?var (nth$ ?i ?platos))
-      (bind ?ordenes (send ?var get-OrdenPlato))
-      (if ( member Segundo ?ordenes)
-       then (bind ?segundos (insert$ ?segundos 1 (send ?var get-Nombre)))
-      )
-   )   
-   (printout t "Segundo: " )
-   (bind ?segundo (random-elem ?segundos) ) 
-   (printout t ?segundo crlf)
-   
-   (bind ?postres (create$ ))   
-   (loop-for-count (?i 1 (length ?platos))     
-      (bind ?var (nth$ ?i ?platos))
-      (bind ?ordenes (send ?var get-OrdenPlato))
-      (if ( member Postre ?ordenes)
-       then (bind ?postres (insert$ ?postres 1 (send ?var get-Nombre)))
-      )
-   )   
-   (printout t "Postre: " )
-   (bind ?postre (random-elem ?postres) ) 
-   (printout t ?postre crlf)
-
+	=>
+	(bind ?aux (getMenu 1 ?c ?l ?v))
+	(bind ?aux (getMenu 2 ?c ?l ?v))
+	(bind ?aux (getMenu 3 ?c ?l ?v))
 )
-
-
-
 
 ; (defrule getBebidas
 	; (declare (salience 40))
@@ -725,4 +696,3 @@
 	; (bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE )) ;;;(> (?inst:Precio) 0)	
 	; (printout t ?bebidas)	
 ; )
-
