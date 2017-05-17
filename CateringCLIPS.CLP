@@ -395,7 +395,6 @@
 	
 	)
 ;;;;;;;;;;; CODIGO CLIPS  ;;;;;;;;;;;;;
-
 ;;****************
 ;;* DEFTEMPLATES *
 ;;**************** 
@@ -456,7 +455,10 @@
 	(bind ?precio (+ (send ?p1 get-Precio) (send ?p2 get-Precio) (send ?p3 get-Precio) (send ?b get-Precio)))
 )      
 
-(deffunction getMenu (?nMenu ?c ?l ?v)
+(deffunction getMenu (?nMenu ?c ?l ?v ?pMin ?pMax)
+
+   (bind ?preuAcum 0)
+  
    (if (eq ?c si) ; si complejo (poca gente) cualquier bebida
     then (bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE ))
     ; si no complejo (mucha gente) no alcoholicas
@@ -476,53 +478,101 @@
         )
     )
     
+	(bind ?intrvPrecio (- ?pMax ?pMin))
+
+	;Definicio dels intervals dels menus
+	(bind ?minIntrv1 ?pMin)
+	(bind ?maxIntrv1 (+ ?pMin (* 0.3333333 ?intrvPrecio)))
+	(bind ?minIntrv2 ?maxIntrv1)
+	(bind ?maxIntrv2 (+ ?pMin (* 0.6666667 ?intrvPrecio)))
+	(bind ?minIntrv3 ?maxIntrv2)
+	(bind ?maxIntrv3 ?pMax)	
+	
    (printout t crlf)
    (printout t "Menú " ?nMenu crlf)
    (printout t "Bebida: " )
-   (bind ?bebida (random-elem ?bebidas) )   
+   (if (not (eq ?c si))
+    then (bind ?bebida (random-elem ?bebidas) )
+		 (bind ?preuAcum (+ ?preuAcum (send ?bebida get-Precio)))
+	)
    (printout t (send ?bebida get-Nombre) crlf)
    
    (bind ?primeros (create$ ))   
    (loop-for-count (?i 1 (length ?platos))     
-      (bind ?var (nth$ ?i ?platos))
-      (bind ?ordenes (send ?var get-OrdenPlato))
-      (if ( member Primero ?ordenes)
-       then (bind ?primeros (insert$ ?primeros 1 ?var))
-      )
-   )   
+		(bind ?var (nth$ ?i ?platos))
+		(bind ?ordenes (send ?var get-OrdenPlato))
+		(bind ?preuAct (send ?var get-Precio))
+		(if (and (member Primero ?ordenes) (>= ?preuAct (* 0.4 ?minIntrv1)) (<= ?preuAct (* 0.4 ?maxIntrv1)) (eq ?nMenu 1))
+			then(bind ?primeros (insert$ ?primeros 1 ?var))
+		)
+		(if (and (member Primero ?ordenes) (>= ?preuAct (* 0.4 ?minIntrv2)) (<= ?preuAct (* 0.4 ?maxIntrv2)) (eq ?nMenu 2))
+			then(bind ?primeros (insert$ ?primeros 1 ?var))
+		)
+		(if (and (member Primero ?ordenes) (>= ?preuAct (* 0.4 ?minIntrv3)) (<= ?preuAct (* 0.4 ?maxIntrv3)) (eq ?nMenu 3))
+			then(bind ?primeros (insert$ ?primeros 1 ?var))
+		)
+	)
+	(printout t ?primeros crlf)
+   
    (printout t "Primero: " )
    (bind ?primero (random-elem ?primeros) ) 
+   (bind ?preuAcum (+ ?preuAcum (send ?primero get-Precio)))
    (printout t (send ?primero get-Nombre) crlf)   
-   
+  
    (bind ?segundos (create$ ))   
    (loop-for-count (?i 1 (length ?platos))     
-      (bind ?var (nth$ ?i ?platos))
-      (bind ?ordenes (send ?var get-OrdenPlato))
-      (if ( member Segundo ?ordenes)
-       then (bind ?segundos (insert$ ?segundos 1 ?var))
-      )
-   )   
+		(bind ?var (nth$ ?i ?platos))
+		(bind ?ordenes (send ?var get-OrdenPlato))
+		(bind ?preuAct (send ?var get-Precio))
+		(if (eq ?c si)
+		then ()		
+		)
+		;(bind ?preuAct (+ (send ?var:bebidaAsociada get-Precio)(send ?var get-Precio)))
+		(if (and (member Segundo ?ordenes) (>= ?preuAct (* 0.4 ?minIntrv1)) (<= ?preuAct (* 0.4 ?maxIntrv1)) (eq ?nMenu 1))
+			then(bind ?segundos (insert$ ?segundos 1 ?var)
+		)			
+		)
+		(if (and (member Segundo ?ordenes) (>= ?preuAct (* 0.4 ?minIntrv2)) (<= ?preuAct (* 0.4 ?maxIntrv2)) (eq ?nMenu 2))
+			then(bind ?segundos (insert$ ?segundos 1 ?var)			
+		)
+		)
+		(if (and (member Segundo ?ordenes) (>= ?preuAct (* 0.4 ?minIntrv3)) (<= ?preuAct (* 0.4 ?maxIntrv3)) (eq ?nMenu 3))
+			then(bind ?segundos (insert$ ?segundos 1 ?var)
+		)
+		)
+	)
+	
    (printout t "Segundo: " )
    (bind ?segundo (random-elem ?segundos) ) 
+   (bind ?preuAcum (+ ?preuAcum (send ?segundo get-Precio)))
    (printout t (send ?segundo get-Nombre) crlf)
    
    (bind ?postres (create$ ))   
    (loop-for-count (?i 1 (length ?platos))     
-      (bind ?var (nth$ ?i ?platos))
-      (bind ?ordenes (send ?var get-OrdenPlato))
-      (if ( member Postre ?ordenes)
-       then (bind ?postres (insert$ ?postres 1 ?var))
-      )
-   )   
+		(bind ?var (nth$ ?i ?platos))
+		(bind ?ordenes (send ?var get-OrdenPlato))
+		(bind ?preuAct (send ?var get-Precio))
+		(if (and (member Postre ?ordenes) (>= ?preuAct (* 0.2 ?minIntrv1)) (<= ?preuAct (* 0.2 ?maxIntrv1)) (eq ?nMenu 1))
+			then(bind ?postres (insert$ ?postres 1 ?var))
+		)
+		(if (and (member Postre ?ordenes) (>= ?preuAct (* 0.2 ?minIntrv2)) (<= ?preuAct (* 0.2 ?maxIntrv2))  (eq ?nMenu 2))
+			then(bind ?postres (insert$ ?postres 1 ?var))
+		)
+		(if (and (member Postre ?ordenes) (>= ?preuAct (* 0.2 ?minIntrv3)) (<= ?preuAct (* 0.2 ?maxIntrv3))  (eq ?nMenu 3))
+			then(bind ?postres (insert$ ?postres 1 ?var))
+		)
+	)
+	
    (printout t "Postre: " )
    (bind ?postre (random-elem ?postres) ) 
+   (bind ?preuAcum (+ ?preuAcum (send ?postre get-Precio)))
    (printout t (send ?postre get-Nombre) crlf)
    (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?bebida)))
    (printout t (calcularPrecio ?primero ?segundo ?postre ?bebida))
    ;(bind ?precio (send ?postre get-Precio))
    ;(printout t ?precio)
   )
-
+ 
 ;;;;;;;;;;;;;;  QUERIES ;;;;;;;;;;;;;;;;
 ; SALIENCE = 10
 
@@ -635,10 +685,12 @@
    (complejo ?c)
    (ligero ?l)
    (vegetariano ?v)
+   (precioMin ?pMin)
+   (precioMax ?pMax)
 	=>
-	(bind ?aux (getMenu 1 ?c ?l ?v))
-	(bind ?aux (getMenu 2 ?c ?l ?v))
-	(bind ?aux (getMenu 3 ?c ?l ?v))
+	(bind ?aux (getMenu 1 ?c ?l ?v ?pMin ?pMax))
+	(bind ?aux (getMenu 2 ?c ?l ?v ?pMin ?pMax))
+	(bind ?aux (getMenu 3 ?c ?l ?v ?pMin ?pMax))
 )
 
 ; (defrule getBebidas
