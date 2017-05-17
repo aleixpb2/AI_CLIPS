@@ -477,7 +477,7 @@
     )
     
    (printout t crlf)
-   (printout t "Menú " ?nMenu crlf)
+   (printout t "MenÃº " ?nMenu crlf)
    (printout t "Bebida: " )
    (bind ?bebida (random-elem ?bebidas) )   
    (printout t (send ?bebida get-Nombre) crlf)
@@ -529,12 +529,12 @@
 (defrule preguntar-tipo-evento
  (declare (salience 10))
  => 
- (if (esComida "¿Es una comida o una cena?")
-  then (if (esFamiliar "¿Es un evento familiar o un congreso?")
+ (if (esComida "Å¼Es una comida o una cena?(Comida/Cena)")
+  then (if (esFamiliar "Å¼Es un evento familiar o un congreso?(Familiar/Congreso)")
 		  then (assert (tipoEvento Familiar_comida))
 		  else (assert (tipoEvento Congreso_comida))
           )
-  else (if (esFamiliar "¿Es un evento familiar o un congreso?")
+  else (if (esFamiliar "Å¼Es un evento familiar o un congreso?(Familiar/Congreso)")
 		  then (assert (tipoEvento Familiar_cena))
 		  else (assert (tipoEvento Congreso_cena))
           )
@@ -544,7 +544,7 @@
 (defrule preguntar-estacion
  (declare (salience 10))
  =>
- (printout t "¿En qué estación será el evento?" crlf)
+ (printout t "Å¼En quÃ© estaciÃ³n serÃ¡ el evento?" crlf)
  (printout t "Primavera" crlf)
  (printout t "Verano" crlf)
  (printout t "Otono" crlf)
@@ -556,7 +556,7 @@
 (defrule preguntar-comensales
  (declare (salience 10))
  =>
- (printout t "¿Cuantos comensales?")
+ (printout t "Å¼Cuantos comensales?")
  (bind ?numComs (read))
  (assert (numComs ?numComs)) 
 )
@@ -564,7 +564,7 @@
 (defrule preguntar-precio-max
  (declare (salience 10))
  =>
- (printout t "¿Cual es el maximo presupuesto por persona?")
+ (printout t "Å¼Cual es el maximo presupuesto por persona?")
  (bind ?precioMax (read))
  (assert (precioMax ?precioMax)) 
 )
@@ -572,7 +572,7 @@
 (defrule preguntar-precio-min
  (declare (salience 10))
  =>
- (printout t "¿Cual es el minimo presupuesto por persona?")
+ (printout t "Å¼Cual es el minimo presupuesto por persona?")
  (bind ?precioMin (read))
  (assert (precioMin ?precioMin)) 
 )
@@ -580,7 +580,7 @@
 (defrule preguntar-vegetariano
  (declare (salience 10))
  =>
- (if (yes-or-no-p "¿Quieres un menu vegetariano?")
+ (if (yes-or-no-p "Å¼Quieres un menu vegetariano?(si/no)")
  then (assert (vegetariano si))
  else (assert (vegetariano no)) 
  )
