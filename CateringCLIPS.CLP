@@ -240,7 +240,8 @@
 
 (definstances instancias 
 
-; Wed May 10 18:20:34 CEST 2017
+
+; Thu May 18 19:22:42 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -330,12 +331,453 @@
 ([Catering_Class12] of  Bebida
 
 	(Nombre "Coca Cola")
+	(Precio 2.0))
+
+([Catering_Class20000] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(Nombre "Canelones de setas")
+	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class20000])
+	(Precio 8.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20001] of  Plato
+
+	(Caliente TRUE)
+	(Complejo TRUE)
+	(Estacion Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Crema de calabaza")
+	(OrdenPlato Primero)
+	(Precio 7.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20002] of  Plato
+
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Manzana")
+	(OrdenPlato Postre)
+	(Precio 1.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20004] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Croquetas de espinacas")
+	(OrdenPlato Segundo)
+	(Precio 6.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20005] of  Plato
+
+	(Caliente FALSE)
+	(Clasico FALSE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano)
+	(Ligero TRUE)
+	(Nombre "Vichisoise")
+	(OrdenPlato Primero)
+	(Precio 7.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class20006] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Melocotón en almíbar")
+	(OrdenPlato Postre)
+	(Precio 5.0))
+
+([Catering_Class20007] of  Plato
+
+	(Caliente TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Otono Invierno Verano)
+	(LugarPlato "Francia")
+	(Nombre "Fondue")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class20007])
+	(Precio 15.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class20008] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Pollo al cury")
+	(OrdenPlato Segundo)
+	(PlatosNoCompatibles [Catering_Class20007])
+	(Precio 10.0))
+
+([Catering_Class20009] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(LugarPlato "Catalunya")
+	(Nombre "Trinxat de la cerdanya")
+	(OrdenPlato Primero)
+	(Precio 10.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20010] of  Plato
+
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Hamburguesa con patatas")
+	(OrdenPlato Segundo)
+	(Precio 7.0))
+
+([Catering_Class20011] of  Plato
+
+	(Caliente TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Lasagna")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class20011])
+	(Precio 12.0))
+
+([Catering_Class20012] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Pollo rebozado")
+	(OrdenPlato Segundo)
+	(Precio 5.0))
+
+([Catering_Class20013] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Iogur")
+	(OrdenPlato Postre)
+	(Precio 1.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20014] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Cava")
+	(Precio 4.0))
+
+([Catering_Class20015] of  Bebida
+
+	(Nombre "Fanta de limon")
+	(Precio 2.0))
+
+([Catering_Class20016] of  Bebida
+
+	(Nombre "Agua con gas")
 	(Precio 1.2))
+
+([Catering_Class20017] of  Bebida
+
+	(Nombre "Zumo de naranja")
+	(Precio 3.0))
+
+([Catering_Class20018] of  Plato
+
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Arroz negro")
+	(OrdenPlato Primero)
+	(Precio 15.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class20019] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Ensalada de pasta")
+	(OrdenPlato Primero)
+	(Precio 8.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20020] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano)
+	(Ligero TRUE)
+	(Nombre "Melón con jamon")
+	(OrdenPlato Primero)
+	(Precio 5.0))
+
+([Catering_Class20021] of  Plato
+
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(Nombre "Huevos rellenos con atun")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class20021])
+	(Precio 6.0))
+
+([Catering_Class20022] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Espaguetis a la bolognesa")
+	(OrdenPlato Primero)
+	(Precio 10.0))
+
+([Catering_Class20023] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Raviolis a la carbonara")
+	(OrdenPlato Primero)
+	(Precio 10.0))
+
+([Catering_Class20024] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Otono Invierno)
+	(Nombre "Lentejas estofadas")
+	(OrdenPlato Primero)
+	(Precio 8.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20025] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Albondigas con guisantes")
+	(OrdenPlato Segundo)
+	(Precio 6.0))
+
+([Catering_Class20026] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Paella de valencia")
+	(OrdenPlato Segundo)
+	(PlatosNoCompatibles
+		[Catering_Class20019]
+		[Catering_Class20022]
+		[Catering_Class9]
+		[Catering_Class20023]
+		[Catering_Class6])
+	(Precio 20.0))
+
+([Catering_Class20027] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Merluza al vapor")
+	(OrdenPlato Segundo)
+	(Precio 15.0))
+
+([Catering_Class20028] of  Plato
+
+	(Caliente FALSE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Nuggets de pollo")
+	(OrdenPlato Segundo)
+	(Precio 5.0))
+
+([Catering_Class20029] of  Plato
+
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Arroz con leche")
+	(OrdenPlato Postre)
+	(PlatosNoCompatibles
+		[Catering_Class20029]
+		[Catering_Class20018]
+		[Catering_Class20026]
+		[Catering_Class6])
+	(Precio 3.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class20030] of  Plato
+
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Queso con membrillo")
+	(OrdenPlato Postre)
+	(Precio 3.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class20031] of  Plato
+
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Tiramisu")
+	(OrdenPlato Postre)
+	(Precio 5.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class20032] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Ensaladilla rusa")
+	(OrdenPlato Primero)
+	(Precio 6.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20033] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Tabla de quesos")
+	(OrdenPlato Primero)
+	(Precio 20.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class20034] of  Plato
+
+	(Caliente TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Salmón con patatas")
+	(OrdenPlato Segundo)
+	(PlatosNoCompatibles [Catering_Class20035])
+	(Precio 18.0)
+	(Sibarita TRUE))
+
+([Catering_Class20035] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Sopa de pescado")
+	(OrdenPlato Primero)
+	(Precio 8.0)
+	(Sibarita TRUE))
+
+([Catering_Class20036] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano)
+	(Ligero TRUE)
+	(Nombre "Ensalada de lentejas")
+	(OrdenPlato Primero)
+	(Precio 5.0)
+	(Vegetariano TRUE))
+
+([Catering_Class20037] of  Plato
+
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano)
+	(LugarPlato "Andalucia")
+	(Nombre "Salmorejo")
+	(OrdenPlato Primero)
+	(Precio 10.0))
+
+([Catering_Class20038] of  Plato
+
+	(Clasico TRUE)
+	(Complejo FALSE)
+	(Estacion Primavera Verano)
+	(Ligero TRUE)
+	(LugarPlato "Andalucia")
+	(Nombre "Gazpacho")
+	(OrdenPlato Primero)
+	(Precio 5.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class20039] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Vino rojo")
+	(Precio 3.5))
+
+([Catering_Class20040] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Champan")
+	(Precio 4.0))
+
+([Catering_Class20041] of  Bebida
+
+	(Nombre "Nestea")
+	(Precio 3.0))
+
+([Catering_Class20042] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "China")
+	(Nombre "Noodles")
+	(OrdenPlato Primero)
+	(Precio 6.0))
+
+([Catering_Class20043] of  Plato
+
+	(Clasico FALSE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Peru")
+	(Nombre "Ceviche de pescado")
+	(OrdenPlato Primero)
+	(Precio 18.0)
+	(Sibarita TRUE))
+
+([Catering_Class20045] of  Plato
+
+	(Caliente FALSE)
+	(Clasico FALSE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Marruecos")
+	(Nombre "Cuscus")
+	(OrdenPlato Primero)
+	(Precio 12.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class20046] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Macedonia")
+	(OrdenPlato Postre)
+	(Precio 10.0)
+	(Vegetariano TRUE))
 
 ([Catering_Class4] of  Bebida
 
 	(Alcoholica TRUE)
-	(Nombre "Vino")
+	(Nombre "Vino blanco")
 	(Precio 3.5))
 
 ([Catering_Class5] of  Plato
@@ -345,7 +787,7 @@
 	(Estacion Primavera Verano Otono Invierno)
 	(Nombre "Filete")
 	(OrdenPlato Segundo)
-	(Precio 7.0))
+	(Precio 17.0))
 
 ([Catering_Class6] of  Plato
 
@@ -356,6 +798,7 @@
 	(Nombre "Risoto")
 	(OrdenPlato Primero)
 	(Precio 8.0)
+	(Sibarita TRUE)
 	(Vegetariano TRUE))
 
 ([Catering_Class7] of  Plato
@@ -459,7 +902,7 @@
 
    (bind ?preuAcum 0)
   
-   (if (eq ?c si) ; si complejo (poca gente) cualquier bebida
+   (if (eq ?c si) ;;; si complejo (poca gente) cualquier bebida
     then (bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE ))
     ; si no complejo (mucha gente) no alcoholicas
     else (bind ?bebidas (find-all-instances ((?inst Bebida)) (not (eq ?inst:Alcoholica TRUE)) ))
@@ -494,8 +937,9 @@
    (if (not (eq ?c si))
     then (bind ?bebida (random-elem ?bebidas) )
 		 (bind ?preuAcum (+ ?preuAcum (send ?bebida get-Precio)))
-	)
-   (printout t (send ?bebida get-Nombre) crlf)
+		  (printout t (send ?bebida get-Nombre) crlf)
+
+		 )
    
    (bind ?primeros (create$ ))   
    (loop-for-count (?i 1 (length ?platos))     
@@ -524,9 +968,9 @@
 		(bind ?var (nth$ ?i ?platos))
 		(bind ?ordenes (send ?var get-OrdenPlato))
 		(bind ?preuAct (send ?var get-Precio))
-		(if (eq ?c si)
-		then ()		
-		)
+		;(if (eq ?c si)
+		;then ()		
+		;)
 		;(bind ?preuAct (+ (send ?var:bebidaAsociada get-Precio)(send ?var get-Precio)))
 		(if (and (member Segundo ?ordenes) (>= ?preuAct (* 0.4 ?minIntrv1)) (<= ?preuAct (* 0.4 ?maxIntrv1)) (eq ?nMenu 1))
 			then(bind ?segundos (insert$ ?segundos 1 ?var)

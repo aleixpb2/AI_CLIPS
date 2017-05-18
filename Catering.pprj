@@ -1,4 +1,4 @@
-; Wed May 10 18:30:44 CEST 2017
+; Thu May 18 19:22:42 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -21,11 +21,11 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[Catering_ProjectKB_Class20153]
-		[Catering_ProjectKB_Class20154]
-		[Catering_ProjectKB_Class20155]
-		[Catering_ProjectKB_Class20156]
-		[Catering_ProjectKB_Class20157]))
+		[Catering_ProjectKB_Class20125]
+		[Catering_ProjectKB_Class20126]
+		[Catering_ProjectKB_Class20127]
+		[Catering_ProjectKB_Class20128]
+		[Catering_ProjectKB_Class20129]))
 
 ([Catering_ProjectKB_Class10] of  Property_List
 )
@@ -86,39 +86,39 @@
 ([Catering_ProjectKB_Class20] of  Property_List
 )
 
-([Catering_ProjectKB_Class20153] of  String
+([Catering_ProjectKB_Class20125] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([Catering_ProjectKB_Class20154] of  String
+([Catering_ProjectKB_Class20126] of  String
 
 	(name "Plato")
 	(string_value "Nombre"))
 
-([Catering_ProjectKB_Class20155] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([Catering_ProjectKB_Class20156] of  String
+([Catering_ProjectKB_Class20127] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))
 
-([Catering_ProjectKB_Class20157] of  String
+([Catering_ProjectKB_Class20128] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([Catering_ProjectKB_Class20129] of  String
 
 	(name "Bebida")
 	(string_value "Nombre"))
 
-([Catering_ProjectKB_Class20158] of  Map
+([Catering_ProjectKB_Class20130] of  Map
 )
 
-([Catering_ProjectKB_Class20159] of  Map_Entry
+([Catering_ProjectKB_Class20131] of  Map_Entry
 
 	(key "InstanceDisplay.yellow_stickies")
 	(key_class "java.lang.String")
-	(value "Catering_ProjectKB_Class20158")
+	(value "Catering_ProjectKB_Class20130")
 	(value_class "java.util.Map"))
 
 ([Catering_ProjectKB_Class21] of  Widget
@@ -446,7 +446,7 @@
 
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
-([KB_123316_Class2] of  Map
+([KB_441327_Class2] of  Map
 )
 
 ([KB_830366_Class0] of  String
@@ -456,8 +456,8 @@
 
 ([KB_830366_Class1] of  Map
 
-	(entries [Catering_ProjectKB_Class20159])
-	(referenced_maps [Catering_ProjectKB_Class20158]))
+	(entries [Catering_ProjectKB_Class20131])
+	(referenced_maps [Catering_ProjectKB_Class20130]))
 
 ([KB_830366_Class100] of  String
 
@@ -634,8 +634,8 @@
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
-		[STANDARD_FACET_FORM_WIDGET]
 		[STANDARD_SLOT_FORM_WIDGET]
+		[STANDARD_FACET_FORM_WIDGET]
 		[PAL_FORM_WIDGET]
 		[STANDARD_CLASS_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")
