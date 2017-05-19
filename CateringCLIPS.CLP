@@ -898,7 +898,7 @@
 	(bind ?precio (+ (send ?p1 get-Precio) (send ?p2 get-Precio) (send ?p3 get-Precio) (send ?b get-Precio)))
 )      
 
-(deffunction getMenu (?nMenu ?c ?l ?v ?e ?pMin ?pMax)
+(deffunction getMenu (?nMenu ?c ?l ?v ?e ?s ?pMin ?pMax)
 
    (bind ?preuAcum 0)
   
@@ -911,13 +911,29 @@
     (if (eq ?l si)
     then 
         (if (eq ?v si)
-          then (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero TRUE) (eq ?inst:Vegetariano TRUE) )))
-          else (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Ligero TRUE) ))
-        ) 
+		  ;ES VEGETARIANO
+          then (if (eq ?c si) ;poca gente -> comida compleja o no
+				then (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero TRUE) (eq ?inst:Vegetariano TRUE) )))
+				else (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero TRUE) (eq ?inst:Vegetariano TRUE) (not (eq ?inst:Complejo TRUE)))))
+			) ;FINAL IF COMPLEJO
+		  ;NO ES VEGETARIANO
+          else (if (eq ?c si) 
+					then (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Ligero TRUE)))
+					else (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero TRUE) (not (eq ?inst:Complejo TRUE)))))
+			)
+        )
     else(
-        if (eq ?v si)
-        then (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Vegetariano TRUE) ))
-        else (bind ?platos (find-all-instances ((?inst Plato)) TRUE ))
+		if (eq ?v si)
+			;ES VEGETARIANO
+			then (if (eq ?c si) ;poca gente -> comida compleja o no
+				then (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Vegetariano TRUE)))
+				else (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Vegetariano TRUE) (not (eq ?inst:Complejo TRUE)))))
+			) ;FINAL IF COMPLEJO
+			;NO ES VEGETARIANO
+			else (if (eq ?c si) ;poca gente -> comida compleja o no
+				then (bind ?platos (find-all-instances ((?inst Plato)) TRUE))
+				else (bind ?platos (find-all-instances ((?inst Plato)) (not (eq ?inst:Complejo TRUE))))
+			)
         )
     )
     
@@ -934,7 +950,8 @@
    (printout t crlf)
    (printout t "Menú " ?nMenu crlf)
    (printout t "Bebida: " )
-   (if (not (eq ?c si))
+   ;UNA BEBIDA PARA TODO EL MENU
+   (if (not (eq ?s si))
     then (bind ?bebida (random-elem ?bebidas) )
 		 (bind ?preuAcum (+ ?preuAcum (send ?bebida get-Precio)))
 		  (printout t (send ?bebida get-Nombre) crlf)
@@ -947,6 +964,17 @@
 		(bind ?ordenes (send ?var get-OrdenPlato))
 		(bind ?estaciones (send ?var get-Estacion)) 
 		(bind ?preuAct (send ?var get-Precio))
+		
+		;(if (eq ?s si)
+		;then ()		
+		;)
+		;(bind ?preuAct (+ (send ?var:bebidaAsociada get-Precio)(send ?var get-Precio)))
+		
+		
+		
+		
+		
+		
 		(if (and (member Primero ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv1)) (<= ?preuAct (* 0.4 ?maxIntrv1)) (eq ?nMenu 1))
 			then(bind ?primeros (insert$ ?primeros 1 ?var))
 		)
@@ -959,10 +987,6 @@
 	)
 	(printout t ?primeros crlf)
    
-   (printout t "Primero: " )
-   (bind ?primero (random-elem ?primeros) ) 
-   (bind ?preuAcum (+ ?preuAcum (send ?primero get-Precio)))
-   (printout t (send ?primero get-Nombre) crlf)   
   
    (bind ?segundos (create$ ))   
    (loop-for-count (?i 1 (length ?platos))     
@@ -970,10 +994,7 @@
 		(bind ?ordenes (send ?var get-OrdenPlato))
 		(bind ?estaciones (send ?var get-Estacion)) 
 		(bind ?preuAct (send ?var get-Precio))
-		;(if (eq ?c si)
-		;then ()		
-		;)
-		;(bind ?preuAct (+ (send ?var:bebidaAsociada get-Precio)(send ?var get-Precio)))
+		
 		(if (and (member Segundo ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv1)) (<= ?preuAct (* 0.4 ?maxIntrv1)) (eq ?nMenu 1))
 			then(bind ?segundos (insert$ ?segundos 1 ?var)
 		)			
@@ -988,10 +1009,7 @@
 		)
 	)
 	
-   (printout t "Segundo: " )
-   (bind ?segundo (random-elem ?segundos) ) 
-   (bind ?preuAcum (+ ?preuAcum (send ?segundo get-Precio)))
-   (printout t (send ?segundo get-Nombre) crlf)
+  
    
    (bind ?postres (create$ ))   
    (loop-for-count (?i 1 (length ?platos))     
@@ -1010,12 +1028,26 @@
 		)
 	)
 	
-   (printout t "Postre: " )
-   (bind ?postre (random-elem ?postres) ) 
-   (bind ?preuAcum (+ ?preuAcum (send ?postre get-Precio)))
-   (printout t (send ?postre get-Nombre) crlf)
-   (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?bebida)))
-   (printout t (calcularPrecio ?primero ?segundo ?postre ?bebida))
+	(if  (or (eq 0 (length ?primeros))(eq 0 (length ?segundos))(eq 0 (length ?postres))) ;FALTA MIRAR BEBIDAS
+		then (printout t "No hay suficientes platos para cumplir las restricciones")
+		else (printout t "Primero: " )
+			   (bind ?primero (random-elem ?primeros) ) 
+			   (bind ?preuAcum (+ ?preuAcum (send ?primero get-Precio)))
+			   (printout t (send ?primero get-Nombre) crlf)   
+   
+			   (printout t "Segundo: " )
+			   (bind ?segundo (random-elem ?segundos) ) 
+			   (bind ?preuAcum (+ ?preuAcum (send ?segundo get-Precio)))
+			   (printout t (send ?segundo get-Nombre) crlf)
+   
+			   (printout t "Postre: " )
+			   (bind ?postre (random-elem ?postres) ) 
+			   (bind ?preuAcum (+ ?preuAcum (send ?postre get-Precio)))
+			   (printout t (send ?postre get-Nombre) crlf)
+			   (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?bebida)))
+			   (printout t (calcularPrecio ?primero ?segundo ?postre ?bebida))
+	) 
+  
    ;(bind ?precio (send ?postre get-Precio))
    ;(printout t ?precio)
   )
@@ -1026,14 +1058,14 @@
 (defrule preguntar-tipo-evento
  (declare (salience 10))
  => 
- (if (esComida "żEs una comida o una cena?(Comida/Cena)")
-  then (if (esFamiliar "żEs un evento familiar o un congreso?(Familiar/Congreso)")
-		  then (assert (tipoEvento Familiar_comida))
-		  else (assert (tipoEvento Congreso_comida))
+ (if (esComida "¿Es una comida o una cena?(Comida/Cena)")
+  then (if (esFamiliar "¿Es un evento familiar o un congreso?(Familiar/Congreso)")
+		  then (assert (tipoEvento Familiar)) (assert (turno Comida))
+		  else (assert (tipoEvento Congreso)) (assert (turno Comida))
           )
-  else (if (esFamiliar "żEs un evento familiar o un congreso?(Familiar/Congreso)")
-		  then (assert (tipoEvento Familiar_cena))
-		  else (assert (tipoEvento Congreso_cena))
+  else (if (esFamiliar "¿Es un evento familiar o un congreso?(Familiar/Congreso)")
+		  then (assert (tipoEvento Familiar)) (assert (turno Cena))
+		  else (assert (tipoEvento Congreso)) (assert (turno Cena))
           )
   )
 )
@@ -1041,7 +1073,7 @@
 (defrule preguntar-estacion
  (declare (salience 10))
  =>
- (printout t "żEn qué estación será el evento?" crlf)
+ (printout t "¿En qué estación será el evento?" crlf)
  (printout t "Primavera" crlf)
  (printout t "Verano" crlf)
  (printout t "Otono" crlf)
@@ -1053,7 +1085,7 @@
 (defrule preguntar-comensales
  (declare (salience 10))
  =>
- (printout t "żCuantos comensales?")
+ (printout t "¿Cuantos comensales?")
  (bind ?numComs (read))
  (assert (numComs ?numComs)) 
 )
@@ -1061,7 +1093,7 @@
 (defrule preguntar-precio-max
  (declare (salience 10))
  =>
- (printout t "żCual es el maximo presupuesto por persona?")
+ (printout t "¿Cual es el maximo presupuesto por persona?")
  (bind ?precioMax (read))
  (assert (precioMax ?precioMax)) 
 )
@@ -1069,7 +1101,7 @@
 (defrule preguntar-precio-min
  (declare (salience 10))
  =>
- (printout t "żCual es el minimo presupuesto por persona?")
+ (printout t "¿Cual es el minimo presupuesto por persona?")
  (bind ?precioMin (read))
  (assert (precioMin ?precioMin)) 
 )
@@ -1077,9 +1109,18 @@
 (defrule preguntar-vegetariano
  (declare (salience 10))
  =>
- (if (yes-or-no-p "żQuieres un menu vegetariano?(si/no)")
+ (if (yes-or-no-p "¿Quieres un menu vegetariano?(si/no)")
  then (assert (vegetariano si))
  else (assert (vegetariano no)) 
+ )
+ )
+ 
+ (defrule preguntar-sibarita
+ (declare (salience 10))
+ =>
+ (if (yes-or-no-p "¿Quieres un menu sibarita?(si/no)")
+ then (assert (sibarita si))
+ else (assert (sibarita no)) 
  )
  )
 
@@ -1101,9 +1142,9 @@
 )
 
 (defrule ligereza
-   (tipoEvento ?te)
+   (turno ?te)
    =>
-   (if(or ( eq ?te Familiar_cena) (eq ?te Congreso_cena) )
+   (if( eq ?te Cena)
    then (assert (ligero si))
    else (assert (ligero no))
    )
@@ -1135,10 +1176,11 @@
    (precioMin ?pMin)
    (precioMax ?pMax)
    (estacion ?e)
+   (sibarita ?s)
 	=>
-	(bind ?aux (getMenu 1 ?c ?l ?v ?e ?pMin ?pMax))
-	(bind ?aux (getMenu 2 ?c ?l ?v ?e ?pMin ?pMax))
-	(bind ?aux (getMenu 3 ?c ?l ?v ?e ?pMin ?pMax))
+	(bind ?aux (getMenu 1 ?c ?l ?v ?e ?s ?pMin ?pMax))
+	(bind ?aux (getMenu 2 ?c ?l ?v ?e ?s ?pMin ?pMax))
+	(bind ?aux (getMenu 3 ?c ?l ?v ?e ?s ?pMin ?pMax))
 )
 
 ; (defrule getBebidas
