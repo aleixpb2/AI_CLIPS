@@ -1484,7 +1484,7 @@
 	(bind ?precio (+ (send ?p1 get-Precio) (send ?p2 get-Precio) (send ?p3 get-Precio) (send ?b get-Precio)))
 )      
 
-(deffunction getMenu (?nMenu ?c ?l ?v ?e ?s ?te ?pMin ?pMax)
+(deffunction getMenu (?nMenu ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax)
 
    (bind ?preuAcum 0)
   
@@ -1523,6 +1523,38 @@
         )
     )
     
+	(if (eq ?re si)
+	then
+   (bind ?platosaux (create$ ))   
+
+		(loop-for-count (?i 1 (length ?platos))     
+			(bind ?var (nth$ ?i ?platos))
+			(if (not (eq (send ?var get-LugarPlato) "" ))
+			then 
+				(insert$ ?platosaux 1 ?var)
+			)
+		)
+		
+		(bind ?platos ?platosaux)
+		
+	)
+	
+	(if (eq ?s si)
+	then
+        (bind ?platosaux (create$ ))   
+
+		(loop-for-count (?i 1 (length ?platos))     
+			(bind ?var (nth$ ?i ?platos))
+			(if (eq (send ?var get-Sibarita) TRUE )
+			then 
+				(insert$ ?platosaux 1 ?var)
+			)
+		)
+		
+		(bind ?platos ?platosaux)
+		
+	)
+		
 	(bind ?intrvPrecio (- ?pMax ?pMin))
 
 	;Definicio dels intervals dels menus
@@ -1534,7 +1566,7 @@
 	(bind ?maxIntrv3 ?pMax)	
 	
    (printout t crlf)
-   (printout t "Menú " ?nMenu crlf)
+   (printout t "Menu " ?nMenu crlf)
    (printout t "Bebida: " )
    ;UNA BEBIDA PARA TODO EL MENU
    (if (not (eq ?s si))
@@ -1543,8 +1575,10 @@
 		  (printout t (send ?bebida get-Nombre) crlf)
 	;UNA BEBIDA PARA CADA PLATO
 	else ( 
-		if ((eq ?te Familiar)
-		then (bind ?bebidaprimero (random-elem ?bebidas)))
+		if (eq ?te Familiar)
+		then (bind ?bebidaprimero (random-elem ?bebidas))
+		then (bind ?bebidasegundo (random-elem ?bebidas))
+		then (bind ?bebidapostre (random-elem ?bebidas))
 		)
 	)
 	
@@ -1560,7 +1594,7 @@
 		(if (eq ?s si)
 		then ( if (eq ?te Congreso)
 				then  	 (bind ?bebidaAct (send ?var get-BebidaAsociada) )
-						(bind ?preuAct (+ (send ?var:bebidaAsociada get-Precio)(send ?var get-Precio)))
+						(bind ?preuAct (+ (send ?bebidaAct get-Precio)(send ?var get-Precio)))
 
 				else (bind ?preuAct (+ (send ?bebidaprimero get-Precio) (send ?var get-Precio)))
 			)
@@ -1574,12 +1608,14 @@
 		)
 		(if (and (member Primero ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv2)) (<= ?preuAct (* 0.4 ?maxIntrv2)) (eq ?nMenu 2))
 			then(bind ?primeros (insert$ ?primeros 1 ?var))
+
+			(printout t (send ?var get-Nombre) crlf )			
 		)
 		(if (and (member Primero ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv3)) (<= ?preuAct (* 0.4 ?maxIntrv3)) (eq ?nMenu 3))
 			then(bind ?primeros (insert$ ?primeros 1 ?var))
 		)
 	)
-	(printout t ?primeros crlf)
+	;(printout t ?primeros crlf)
    
   
    (bind ?segundos (create$ ))   
@@ -1589,13 +1625,26 @@
 		(bind ?estaciones (send ?var get-Estacion)) 
 		(bind ?preuAct (send ?var get-Precio))
 		
+		
+		(if (eq ?s si)
+		then ( if (eq ?te Congreso)
+				then  	 (bind ?bebidaAct (send ?var get-BebidaAsociada) )
+						(bind ?preuAct (+ (send ?bebidaAct get-Precio)(send ?var get-Precio)))
+
+				else (bind ?preuAct (+ (send ?bebidasegundo get-Precio) (send ?var get-Precio)))
+			)
+
+		)		
+
 		(if (and (member Segundo ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv1)) (<= ?preuAct (* 0.4 ?maxIntrv1)) (eq ?nMenu 1))
 			then(bind ?segundos (insert$ ?segundos 1 ?var)
 		)			
 		)
 		(if (and (member Segundo ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv2)) (<= ?preuAct (* 0.4 ?maxIntrv2)) (eq ?nMenu 2))
-			then(bind ?segundos (insert$ ?segundos 1 ?var)			
-		)
+			
+			then(bind ?segundos (insert$ ?segundos 1 ?var))
+
+			(printout t (send ?var get-Nombre) crlf)
 		)
 		(if (and (member Segundo ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv3)) (<= ?preuAct (* 0.4 ?maxIntrv3)) (eq ?nMenu 3))
 			then(bind ?segundos (insert$ ?segundos 1 ?var)
@@ -1603,6 +1652,7 @@
 		)
 	)
 	
+	(printout t crlf)
   
    
    (bind ?postres (create$ ))   
@@ -1611,44 +1661,98 @@
 		(bind ?ordenes (send ?var get-OrdenPlato))
 		(bind ?estaciones (send ?var get-Estacion)) 
 		(bind ?preuAct (send ?var get-Precio))
+		
+		(if (eq ?s si)
+		then ( if (eq ?te Congreso)
+				then  	 (bind ?bebidaAct (send ?var get-BebidaAsociada) )
+						(bind ?preuAct (+ (send ?bebidaAct get-Precio)(send ?var get-Precio)))
+
+				else (bind ?preuAct (+ (send ?bebidapostre get-Precio) (send ?var get-Precio)))
+			)
+
+		)		
+
 		(if (and (member Postre ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.2 ?minIntrv1)) (<= ?preuAct (* 0.2 ?maxIntrv1)) (eq ?nMenu 1))
 			then(bind ?postres (insert$ ?postres 1 ?var))
 		)
 		(if (and (member Postre ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.2 ?minIntrv2)) (<= ?preuAct (* 0.2 ?maxIntrv2))  (eq ?nMenu 2))
 			then(bind ?postres (insert$ ?postres 1 ?var))
+			
+			(printout t (send ?var get-Nombre))
 		)
 		(if (and (member Postre ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.2 ?minIntrv3)) (<= ?preuAct (* 0.2 ?maxIntrv3))  (eq ?nMenu 3))
 			then(bind ?postres (insert$ ?postres 1 ?var))
 		)
 	)
-	
+	;(bind ?postres (insert$ ?postres 1 (random-elem ?primeros)))
 	(if  (or (eq 0 (length ?primeros))(eq 0 (length ?segundos))(eq 0 (length ?postres))) ;FALTA MIRAR BEBIDAS
 		then (printout t "No hay suficientes platos para cumplir las restricciones" crlf)
 		else (printout t "Primero: " )
 			   (bind ?primero (random-elem ?primeros) ) 
 			   (bind ?listbebidas (create$ ))   
 
-			   if (
-				(eq ?s si)
-				
-					then (bind ?listbebidas (insert$ ?listbebidas 1 ?primero:bebidaAsociada ))
+			   (if (eq ?s si)
+				   then (if (eq ?te Congreso) 
+						then (bind ?listbebidas (insert$ ?listbebidas 1 (send ?primero get-BebidaAsociada)) )
+						else (bind ?listbebidas (insert$ ?listbebidas 1 ?bebidaprimero))
+
+						)
 				)
 			   (bind ?preuAcum (+ ?preuAcum (send ?primero get-Precio)))
-			   (printout t (send ?primero get-Nombre) crlf)   
-   
+			   
+			   (bind ?segundoscompatibles (create$ ))   
+
+			   (loop-for-count (?i 1 (length ?segundos))     
+					(bind ?var (nth$ ?i ?segundos))
+					(if (not(member ?var (send ?primero get-PlatosNoCompatibles)))
+						then (insert$ ?segundoscompatibles 1 ?var)
+					)
+				)
 			   (printout t "Segundo: " )
-			   (bind ?segundo (random-elem ?segundos) ) 
+			   (bind ?segundo (random-elem ?segundoscompatibles) ) 
+	
+			   (if (eq ?s si)
+				   then (if (eq ?te Congreso) 
+						then (bind ?listbebidas (insert$ ?listbebidas 1 (send ?segundo get-BebidaAsociada)) )
+						else (bind ?listbebidas (insert$ ?listbebidas 1 ?bebidasegundo))
+						)
+
+				)
+	
 			   (bind ?preuAcum (+ ?preuAcum (send ?segundo get-Precio)))
 			   (printout t (send ?segundo get-Nombre) crlf)
    
 			   (printout t "Postre: " )
-			   (bind ?postre (random-elem ?postres) ) 
+			   
+			   (bind ?postrescompatibles (create$ ))   
+
+			   (loop-for-count (?i 1 (length ?postres))     
+					(bind ?var (nth$ ?i ?postres))
+					(if (and (not(member ?var (send ?primero get-PlatosNoCompatibles))) (not(member ?var (send ?segundo get-PlatosNoCompatibles))))
+						then (insert$ ?postrescompatibles 1 ?var)
+					)
+				)
+			   
+			   (bind ?postre (random-elem ?postrescompatibles) )	 
+			   
+			   (if (eq ?s si)
+				   then (if (eq ?te Congreso) 
+						then (bind ?listbebidas (insert$ ?listbebidas 1 (send ?postre get-BebidaAsociada)) )
+						else (bind ?listbebidas (insert$ ?listbebidas 1 ?bebidapostre))
+						)
+				)
 			   (bind ?preuAcum (+ ?preuAcum (send ?postre get-Precio)))
 			   (printout t (send ?postre get-Nombre) crlf)
 				
 				
-			   (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?bebida)))
-			   (printout t (calcularPrecio ?primero ?segundo ?postre ?bebida))
+			   (if (eq ?s si) 
+				then (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?listbebidas)))
+					
+					(printout t "calcular precio -")
+				else (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?bebida)))
+					(printout t (calcularPrecio ?primero ?segundo ?postre ?bebida))
+				
+			   )
 	) 
   
    ;(bind ?precio (send ?postre get-Precio))
@@ -1726,6 +1830,15 @@
  else (assert (sibarita no)) 
  )
  )
+ 
+ (defrule preguntar-regional
+ (declare (salience 10))
+ =>
+ (if (yes-or-no-p "¿Quieres un menu con platos de diferentes regiones?(si/no)")
+ then (assert (regional si))
+ else (assert (regional no)) 
+ )
+ )
 
 ;;;;;;;;;;;;; CONCLUSIONS ;;;;;;;;;;;;;;
 ; NO SALIENCE
@@ -1781,10 +1894,11 @@
    (estacion ?e)
    (sibarita ?s)
    (tipoEvento ?te)
+   (regional ?re)
 	=>
-	(bind ?aux (getMenu 1 ?c ?l ?v ?e ?s ?te ?pMin ?pMax))
-	(bind ?aux (getMenu 2 ?c ?l ?v ?e ?s ?te ?pMin ?pMax))
-	(bind ?aux (getMenu 3 ?c ?l ?v ?e ?s ?te ?pMin ?pMax))
+	(bind ?aux (getMenu 1 ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax))
+	(bind ?aux (getMenu 2 ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax))
+	(bind ?aux (getMenu 3 ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax))
 )
 
 ; (defrule getBebidas
