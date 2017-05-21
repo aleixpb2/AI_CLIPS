@@ -1,4 +1,4 @@
-; Sun May 21 05:08:44 CEST 2017
+; Sun May 21 09:24:50 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -28,6 +28,7 @@
 
 ([Catering_Class10001] of  Plato
 
+	(BebidaAsociada [Catering_Class40013])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -166,6 +167,7 @@
 
 ([Catering_Class20005] of  Plato
 
+	(BebidaAsociada [Catering_Class40029])
 	(Caliente FALSE)
 	(Clasico FALSE)
 	(Complejo TRUE)
@@ -217,6 +219,7 @@
 
 ([Catering_Class20009] of  Plato
 
+	(BebidaAsociada [Catering_Class40016])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "Catalunya")
@@ -450,6 +453,7 @@
 
 ([Catering_Class20031] of  Plato
 
+	(BebidaAsociada [Catering_Class40045])
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "Italia")
@@ -897,6 +901,7 @@
 
 ([Catering_Class30033] of  Plato
 
+	(BebidaAsociada [Catering_Class40051])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono)
 	(Ligero TRUE)
@@ -909,6 +914,7 @@
 
 ([Catering_Class30034] of  Plato
 
+	(BebidaAsociada [Catering_Class40055])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Otono Invierno)
@@ -934,6 +940,7 @@
 
 ([Catering_Class30036] of  Plato
 
+	(BebidaAsociada [Catering_Class1])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -958,6 +965,7 @@
 
 ([Catering_Class30038] of  Plato
 
+	(BebidaAsociada [Catering_Class40004])
 	(Clasico FALSE)
 	(Complejo TRUE)
 	(Estacion Verano Primavera Otono Invierno)
@@ -970,6 +978,7 @@
 
 ([Catering_Class30039] of  Plato
 
+	(BebidaAsociada [Catering_Class40007])
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
 	(LugarPlato "Japon")
@@ -1089,6 +1098,7 @@
 
 ([Catering_Class30048] of  Plato
 
+	(BebidaAsociada [Catering_Class40027])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
