@@ -2,9 +2,8 @@
 ;; ONTOLOGIA
 
 
-
-; Sun May 21 16:25:30 CEST 2017
-; 
+; Sun May 21 21:34:31 CEST 2017
+;
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
@@ -149,24 +148,24 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot Estacion
-		(type SYMBOL)
-		(allowed-values Primavera Verano Otono Invierno)
-		(cardinality 1 4)
-		(create-accessor read-write))
 	(single-slot Complejo
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot PlatosNoCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Plato)
+	(multislot Estacion
+		(type SYMBOL)
+		(allowed-values Primavera Verano Otono Invierno)
+		(cardinality 1 4)
 		(create-accessor read-write))
 	(single-slot TipoPlato
 ;+		(comment "Por ahora no requerido")
 		(type STRING)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot PlatosNoCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Plato)
 		(create-accessor read-write))
 	(single-slot Ligero
 		(type SYMBOL)
@@ -183,21 +182,21 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot BebidasNoCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Bebida)
-		(create-accessor read-write))
 	(single-slot Nombre
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Sibarita
+	(multislot BebidasNoCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Bebida)
+		(create-accessor read-write))
+	(single-slot Clasico
+;+		(comment "Clasico/Moderno")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Clasico
-;+		(comment "Clasico/Moderno")
+	(single-slot Sibarita
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
@@ -221,12 +220,12 @@
 (defclass Bebida
 	(is-a USER)
 	(role concrete)
-	(single-slot Nombre
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot Precio
 		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Nombre
+		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Alcoholica
@@ -234,14 +233,17 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; INSTANCIAS
 
 (definstances instancias
 
 
-; Sun May 21 17:39:34 CEST 2017
-; 
+; Sun May 21 21:34:31 CEST 2017
+;
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
@@ -400,13 +402,16 @@
 ([Catering_Class20004] of  Plato
 
 	(BebidaAsociada [Catering_Class30012])
+	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
-	(Nombre "Croquetas de espinacas")
+	(Nombre "Croquetas de pescado y marisco")
 	(OrdenPlato Segundo)
-	(Precio 6.0)
-	(Vegetariano TRUE))
+	(Precio 7.0)
+	(Sibarita TRUE)
+	(TipoPlato "Pescado")
+	(Vegetariano FALSE))
 
 ([Catering_Class20005] of  Plato
 
@@ -1303,7 +1308,7 @@
 	(Nombre "Fish & Chips")
 	(OrdenPlato Primero Segundo)
 	(PlatosNoCompatibles [Catering_Class30044])
-	(Precio 6.0)
+	(Precio 4.2)
 	(TipoPlato "Pescado"))
 
 ([Catering_Class30045] of  Plato
@@ -1906,7 +1911,7 @@
 
 ([Catering_Class40066] of  Plato
 
-	(BebidaAsociada [Catering_Class40039])
+	(BebidaAsociada [Catering_Class40029])
 	(Caliente TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero FALSE)
@@ -1927,6 +1932,39 @@
 	(OrdenPlato Segundo)
 	(Precio 17.0)
 	(TipoPlato "Carne"))
+
+([Catering_Class50000] of  Plato
+
+	(BebidaAsociada [Catering_Class40020])
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Coliflor con bechamel")
+	(OrdenPlato Primero)
+	(Precio 4.0)
+	(Vegetariano TRUE))
+
+([Catering_Class50002] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Italia")
+	(Nombre "Espaguetis a la carbonara")
+	(OrdenPlato Primero)
+	(Precio 3.0))
+
+([Catering_Class50003] of  Plato
+
+	(BebidaAsociada [Catering_Class30002])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(Nombre "Calamares a la romana")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class50003])
+	(Precio 4.5))
 
 ([Catering_Class50004] of  Plato
 
@@ -2055,6 +2093,7 @@
 
 ([Catering_Class50014] of  Plato
 
+	(BebidaAsociada [Catering_Class30002])
 	(Clasico TRUE)
 	(Estacion Verano Primavera Otono Invierno)
 	(Ligero TRUE)
@@ -2157,6 +2196,7 @@
 
 ([Catering_Class50022] of  Plato
 
+	(BebidaAsociada [Catering_Class30002])
 	(Estacion Primavera Verano Invierno Otono)
 	(Ligero TRUE)
 	(LugarPlato "Grecia")
@@ -2173,7 +2213,7 @@
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "Mejicana")
-	(Nombre "Burrito  de pollo")
+	(Nombre "Burrito de pollo")
 	(OrdenPlato Segundo)
 	(Precio 8.0))
 
@@ -2214,7 +2254,7 @@
 	(LugarPlato "Mejicano")
 	(Nombre "Guacamole con totopos")
 	(OrdenPlato Primero)
-	(Precio 14.0)
+	(Precio 12.5)
 	(Sibarita TRUE)
 	(Vegetariano TRUE))
 
@@ -2274,6 +2314,7 @@
 
 ([Catering_Class50032] of  Plato
 
+	(BebidaAsociada [Catering_Class30002])
 	(Caliente TRUE)
 	(Estacion Invierno Otono Verano Primavera)
 	(LugarPlato "Japon")
@@ -2389,7 +2430,8 @@
 	(Nombre "Caviar Beluga")
 	(OrdenPlato Primero)
 	(Precio 50.0)
-	(Sibarita TRUE))
+	(Sibarita TRUE)
+	(TipoPlato "Pescado"))
 
 ([Catering_Class50042] of  Plato
 
@@ -2411,7 +2453,7 @@
 	(LugarPlato "Catalunya")
 	(Nombre "Arroz a la Cubana con platano")
 	(OrdenPlato Primero)
-	(Precio 9.0))
+	(Precio 7.0))
 
 ([Catering_Class50044] of  Plato
 
@@ -2476,7 +2518,7 @@
 	(LugarPlato "Francia")
 	(Nombre "Quiche de puerros y apio")
 	(OrdenPlato Primero)
-	(Precio 13.0)
+	(Precio 6.0)
 	(Sibarita TRUE)
 	(Vegetariano TRUE))
 
@@ -2490,7 +2532,7 @@
 	(LugarPlato "Francia")
 	(Nombre "Quiche Lorraine")
 	(OrdenPlato Primero)
-	(Precio 15.0)
+	(Precio 9.0)
 	(Sibarita TRUE))
 
 ([Catering_Class6] of  Plato
@@ -2506,6 +2548,261 @@
 	(Precio 8.0)
 	(Sibarita TRUE)
 	(Vegetariano TRUE))
+
+([Catering_Class60004] of  Plato
+
+	(BebidaAsociada [Catering_Class40020])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(Nombre "Pure de patatas con bacon")
+	(OrdenPlato Primero)
+	(Precio 2.0))
+
+([Catering_Class60005] of  Plato
+
+	(BebidaAsociada [Catering_Class30057])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Patatas fritas")
+	(OrdenPlato Primero)
+	(Precio 1.5)
+	(Vegetariano TRUE))
+
+([Catering_Class60006] of  Plato
+
+	(BebidaAsociada [Catering_Class40054])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(LugarPlato "Catalunya")
+	(Nombre "Escudella barrejada")
+	(OrdenPlato Primero)
+	(Precio 3.0)
+	(Sibarita TRUE)
+	(TipoPlato "Sopa"))
+
+([Catering_Class60007] of  Plato
+
+	(BebidaAsociada [Catering_Class40049])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Italia")
+	(Nombre "Focaccia")
+	(OrdenPlato Primero)
+	(Precio 2.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class60008] of  Plato
+
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Italia")
+	(Nombre "Pan de ajo")
+	(OrdenPlato Primero)
+	(Precio 3.0)
+	(Vegetariano TRUE))
+
+([Catering_Class60010] of  Plato
+
+	(BebidaAsociada [Catering_Class40037])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(LugarPlato "Austria")
+	(Nombre "Apfelstrudel")
+	(OrdenPlato Postre)
+	(Precio 3.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class60012] of  Plato
+
+	(BebidaAsociada [Catering_Class40052])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(LugarPlato "Malaga")
+	(Nombre "Pollo Campero")
+	(OrdenPlato Segundo)
+	(Precio 4.0)
+	(TipoPlato "Carne"))
+
+([Catering_Class60013] of  Plato
+
+	(BebidaAsociada [Catering_Class40046])
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Rape a la plancha")
+	(OrdenPlato Segundo)
+	(Precio 6.0)
+	(TipoPlato "Pescado"))
+
+([Catering_Class60014] of  Plato
+
+	(BebidaAsociada [Catering_Class30002])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Francia")
+	(Nombre "Rape estilo orly")
+	(OrdenPlato Segundo)
+	(Precio 5.0)
+	(Sibarita TRUE)
+	(TipoPlato "Pescado"))
+
+([Catering_Class60015] of  Plato
+
+	(BebidaAsociada [Catering_Class40013])
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Gambas a la gabardina")
+	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class60015])
+	(Precio 13.0)
+	(Sibarita TRUE)
+	(TipoPlato "Pescado"))
+
+([Catering_Class60016] of  Plato
+
+	(BebidaAsociada [Catering_Class30018])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(LugarPlato "Rusia")
+	(Nombre "Entrecot al Strogonoff")
+	(OrdenPlato Segundo)
+	(Precio 7.0)
+	(Sibarita TRUE))
+
+([Catering_Class60017] of  Plato
+
+	(BebidaAsociada [Catering_Class40026])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Filete a la pimienta verde")
+	(OrdenPlato Segundo)
+	(Precio 8.0)
+	(Sibarita TRUE))
+
+([Catering_Class60019] of  Plato
+
+	(BebidaAsociada [Catering_Class30012])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Croquetas de espinacas")
+	(OrdenPlato Segundo)
+	(Precio 6.0)
+	(Vegetariano TRUE))
+
+([Catering_Class60020] of  Plato
+
+	(BebidaAsociada [Catering_Class30012])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Croquetas de jamon y pollo")
+	(OrdenPlato Segundo)
+	(Precio 5.0)
+	(Sibarita TRUE)
+	(TipoPlato "Carne")
+	(Vegetariano FALSE))
+
+([Catering_Class60021] of  Plato
+
+	(BebidaAsociada [Catering_Class30014])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Buñuelos de bacalao")
+	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class60021])
+	(Precio 4.0)
+	(Sibarita TRUE)
+	(TipoPlato "Pescado"))
+
+([Catering_Class60022] of  Plato
+
+	(BebidaAsociada [Catering_Class30013])
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Italia")
+	(Nombre "Pizza hawaiana")
+	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class60022])
+	(Precio 3.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class60023] of  Plato
+
+	(BebidaAsociada [Catering_Class40022])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Espanya")
+	(Nombre "Torradas de pan con tomate y jamon serrano")
+	(OrdenPlato Primero)
+	(Precio 7.0)
+	(Sibarita TRUE))
+
+([Catering_Class60024] of  Plato
+
+	(BebidaAsociada [Catering_Class40029])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(LugarPlato "Andalucia")
+	(Nombre "Txurrasco de cerdo")
+	(OrdenPlato Segundo)
+	(Precio 4.0))
+
+([Catering_Class60025] of  Plato
+
+	(BebidaAsociada [Catering_Class40017])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Andalucia")
+	(Nombre "Migas")
+	(OrdenPlato Primero)
+	(Precio 2.0)
+	(Sibarita FALSE)
+	(Vegetariano TRUE))
+
+([Catering_Class60026] of  Plato
+
+	(BebidaAsociada [Catering_Class40006])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Esparragos con mayonesa")
+	(OrdenPlato Primero)
+	(Precio 1.5)
+	(Sibarita TRUE)
+	(Vegetariano FALSE))
 
 ([Catering_Class7] of  Plato
 
@@ -2542,10 +2839,6 @@
 	(OrdenPlato Primero)
 	(Precio 6.0)
 	(Vegetariano TRUE))
-
-
-
-
 
 
 
