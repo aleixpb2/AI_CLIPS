@@ -1,7 +1,5 @@
-;;;; ONTOLOGIA
-
-; Fri May 19 20:13:41 CEST 2017
-; 
+; Sun May 21 11:56:58 CEST 2017
+;
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
@@ -146,24 +144,24 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot Estacion
-		(type SYMBOL)
-		(allowed-values Primavera Verano Otono Invierno)
-		(cardinality 1 4)
-		(create-accessor read-write))
 	(single-slot Complejo
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot PlatosNoCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Plato)
+	(multislot Estacion
+		(type SYMBOL)
+		(allowed-values Primavera Verano Otono Invierno)
+		(cardinality 1 4)
 		(create-accessor read-write))
 	(single-slot TipoPlato
 ;+		(comment "Por ahora no requerido")
 		(type STRING)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot PlatosNoCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Plato)
 		(create-accessor read-write))
 	(single-slot Ligero
 		(type SYMBOL)
@@ -180,21 +178,21 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot BebidasNoCompatibles
-		(type INSTANCE)
-;+		(allowed-classes Bebida)
-		(create-accessor read-write))
 	(single-slot Nombre
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Sibarita
+	(multislot BebidasNoCompatibles
+		(type INSTANCE)
+;+		(allowed-classes Bebida)
+		(create-accessor read-write))
+	(single-slot Clasico
+;+		(comment "Clasico/Moderno")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Clasico
-;+		(comment "Clasico/Moderno")
+	(single-slot Sibarita
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
@@ -218,12 +216,12 @@
 (defclass Bebida
 	(is-a USER)
 	(role concrete)
-	(single-slot Nombre
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot Precio
 		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Nombre
+		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Alcoholica
@@ -234,11 +232,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; INSTANCIAS
 
-(definstances instancias 
+(definstances instancias
 
 
-; Fri May 19 20:13:41 CEST 2017
-; 
+; Sun May 21 11:56:58 CEST 2017
+;
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
@@ -256,6 +254,7 @@
 
 ([Catering_Class10000] of  Plato
 
+	(BebidaAsociada [Catering_Class40058])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -266,6 +265,7 @@
 
 ([Catering_Class10001] of  Plato
 
+	(BebidaAsociada [Catering_Class40013])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -278,6 +278,7 @@
 
 ([Catering_Class10002] of  Plato
 
+	(BebidaAsociada [Catering_Class30004])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -289,6 +290,7 @@
 
 ([Catering_Class10003] of  Plato
 
+	(BebidaAsociada [Catering_Class40033])
 	(Caliente TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -299,9 +301,11 @@
 
 ([Catering_Class10004] of  Plato
 
+	(BebidaAsociada [Catering_Class40014])
 	(Clasico TRUE)
 	(Estacion Verano Primavera Otono Invierno)
 	(Ligero TRUE)
+	(LugarPlato "Francia")
 	(Nombre "Flan")
 	(OrdenPlato Postre)
 	(Precio 3.0)
@@ -310,6 +314,7 @@
 
 ([Catering_Class10005] of  Plato
 
+	(BebidaAsociada [Catering_Class40007])
 	(Clasico TRUE)
 	(Complejo TRUE)
 	(Estacion Verano Primavera Otono Invierno)
@@ -322,6 +327,7 @@
 
 ([Catering_Class10006] of  Plato
 
+	(BebidaAsociada [Catering_Class30011])
 	(Caliente TRUE)
 	(Clasico FALSE)
 	(Complejo TRUE)
@@ -351,6 +357,7 @@
 
 ([Catering_Class20000] of  Plato
 
+	(BebidaAsociada [Catering_Class40012])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -364,6 +371,7 @@
 
 ([Catering_Class20001] of  Plato
 
+	(BebidaAsociada [Catering_Class40044])
 	(Caliente TRUE)
 	(Complejo TRUE)
 	(Estacion Otono Invierno)
@@ -375,6 +383,7 @@
 
 ([Catering_Class20002] of  Plato
 
+	(BebidaAsociada [Catering_Class40020])
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
 	(Nombre "Manzana")
@@ -384,6 +393,7 @@
 
 ([Catering_Class20004] of  Plato
 
+	(BebidaAsociada [Catering_Class30012])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -394,6 +404,7 @@
 
 ([Catering_Class20005] of  Plato
 
+	(BebidaAsociada [Catering_Class40029])
 	(Caliente FALSE)
 	(Clasico FALSE)
 	(Complejo TRUE)
@@ -408,6 +419,7 @@
 
 ([Catering_Class20006] of  Plato
 
+	(BebidaAsociada [Catering_Class40023])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Nombre "Melocotón en almíbar")
@@ -416,6 +428,7 @@
 
 ([Catering_Class20007] of  Plato
 
+	(BebidaAsociada [Catering_Class40017])
 	(Caliente TRUE)
 	(Complejo TRUE)
 	(Estacion Primavera Otono Invierno Verano)
@@ -429,6 +442,7 @@
 
 ([Catering_Class20008] of  Plato
 
+	(BebidaAsociada [Catering_Class40017])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -442,6 +456,7 @@
 
 ([Catering_Class20009] of  Plato
 
+	(BebidaAsociada [Catering_Class40016])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "Catalunya")
@@ -452,6 +467,7 @@
 
 ([Catering_Class20010] of  Plato
 
+	(BebidaAsociada [Catering_Class40005])
 	(Caliente TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Nombre "Hamburguesa con patatas")
@@ -461,6 +477,7 @@
 
 ([Catering_Class20011] of  Plato
 
+	(BebidaAsociada [Catering_Class30005])
 	(Caliente TRUE)
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -473,6 +490,7 @@
 
 ([Catering_Class20012] of  Plato
 
+	(BebidaAsociada [Catering_Class40017])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -483,6 +501,7 @@
 
 ([Catering_Class20013] of  Plato
 
+	(BebidaAsociada [Catering_Class40049])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -494,7 +513,7 @@
 ([Catering_Class20014] of  Bebida
 
 	(Alcoholica TRUE)
-	(Nombre "Raimat Chardonnay (Cava)")
+	(Nombre "Raimat Chardonnay (Cava, D.O. Catalunya)")
 	(Precio 18.2))
 
 ([Catering_Class20015] of  Bebida
@@ -515,6 +534,7 @@
 
 ([Catering_Class20018] of  Plato
 
+	(BebidaAsociada [Catering_Class40042])
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Nombre "Arroz negro")
@@ -525,6 +545,7 @@
 
 ([Catering_Class20019] of  Plato
 
+	(BebidaAsociada [Catering_Class30013])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -535,6 +556,7 @@
 
 ([Catering_Class20020] of  Plato
 
+	(BebidaAsociada [Catering_Class40028])
 	(Clasico TRUE)
 	(Estacion Primavera Verano)
 	(Ligero TRUE)
@@ -545,8 +567,10 @@
 
 ([Catering_Class20021] of  Plato
 
+	(BebidaAsociada [Catering_Class1])
+	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
-	(Ligero FALSE)
+	(Ligero TRUE)
 	(Nombre "Huevos rellenos con atun")
 	(OrdenPlato Primero Segundo)
 	(PlatosNoCompatibles [Catering_Class20021])
@@ -554,6 +578,7 @@
 
 ([Catering_Class20022] of  Plato
 
+	(BebidaAsociada [Catering_Class40044])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -564,6 +589,7 @@
 
 ([Catering_Class20023] of  Plato
 
+	(BebidaAsociada [Catering_Class40057])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -574,6 +600,7 @@
 
 ([Catering_Class20024] of  Plato
 
+	(BebidaAsociada [Catering_Class40050])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -586,6 +613,7 @@
 
 ([Catering_Class20025] of  Plato
 
+	(BebidaAsociada [Catering_Class40029])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -596,6 +624,7 @@
 
 ([Catering_Class20026] of  Plato
 
+	(BebidaAsociada [Catering_Class40048])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -613,6 +642,7 @@
 
 ([Catering_Class20027] of  Plato
 
+	(BebidaAsociada [Catering_Class40006])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -623,6 +653,7 @@
 
 ([Catering_Class20028] of  Plato
 
+	(BebidaAsociada [Catering_Class30013])
 	(Caliente FALSE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -632,6 +663,7 @@
 
 ([Catering_Class20029] of  Plato
 
+	(BebidaAsociada [Catering_Class30011])
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "España")
 	(Nombre "Arroz con leche")
@@ -647,6 +679,7 @@
 
 ([Catering_Class20030] of  Plato
 
+	(BebidaAsociada [Catering_Class40057])
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
 	(Nombre "Queso con membrillo")
@@ -657,6 +690,7 @@
 
 ([Catering_Class20031] of  Plato
 
+	(BebidaAsociada [Catering_Class40045])
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "Italia")
@@ -668,6 +702,7 @@
 
 ([Catering_Class20032] of  Plato
 
+	(BebidaAsociada [Catering_Class30013])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -678,6 +713,7 @@
 
 ([Catering_Class20033] of  Plato
 
+	(BebidaAsociada [Catering_Class30018])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -689,6 +725,7 @@
 
 ([Catering_Class20034] of  Plato
 
+	(BebidaAsociada [Catering_Class40012])
 	(Caliente TRUE)
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -701,6 +738,7 @@
 
 ([Catering_Class20035] of  Plato
 
+	(BebidaAsociada [Catering_Class40006])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -714,6 +752,7 @@
 
 ([Catering_Class20036] of  Plato
 
+	(BebidaAsociada [Catering_Class40022])
 	(Clasico TRUE)
 	(Estacion Primavera Verano)
 	(Ligero TRUE)
@@ -724,6 +763,7 @@
 
 ([Catering_Class20037] of  Plato
 
+	(BebidaAsociada [Catering_Class40051])
 	(Clasico TRUE)
 	(Complejo TRUE)
 	(Estacion Primavera Verano)
@@ -735,6 +775,7 @@
 
 ([Catering_Class20038] of  Plato
 
+	(BebidaAsociada [Catering_Class30013])
 	(Clasico TRUE)
 	(Complejo FALSE)
 	(Estacion Primavera Verano)
@@ -750,7 +791,7 @@
 ([Catering_Class20040] of  Bebida
 
 	(Alcoholica TRUE)
-	(Nombre "Taittinger Brut Réserve (Champagne)")
+	(Nombre "Taittinger Brut Réserve (Champagne, D.O. Reims)")
 	(Precio 52.2))
 
 ([Catering_Class20041] of  Bebida
@@ -760,6 +801,7 @@
 
 ([Catering_Class20042] of  Plato
 
+	(BebidaAsociada [Catering_Class40055])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -771,6 +813,7 @@
 
 ([Catering_Class20043] of  Plato
 
+	(BebidaAsociada [Catering_Class40041])
 	(Clasico FALSE)
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -784,6 +827,7 @@
 
 ([Catering_Class20045] of  Plato
 
+	(BebidaAsociada [Catering_Class40049])
 	(Caliente FALSE)
 	(Clasico FALSE)
 	(Complejo TRUE)
@@ -798,6 +842,7 @@
 
 ([Catering_Class20046] of  Plato
 
+	(BebidaAsociada [Catering_Class40029])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -811,6 +856,30 @@
 	(Alcoholica TRUE)
 	(Nombre "Warsteiner Barril (Cerveza)")
 	(Precio 2.35))
+
+([Catering_Class30000] of  Plato
+
+	(BebidaAsociada [Catering_Class30004])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Otono Invierno Primavera)
+	(LugarPlato "Asturias")
+	(Nombre "Fabada")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30000])
+	(Precio 8.0))
+
+([Catering_Class30002] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "A Punt (Vino blanco, Mallorca)")
+	(Precio 14.2))
+
+([Catering_Class30003] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Four Lines (Vino blanco, D.O. Rueda)")
+	(Precio 10.0))
 
 ([Catering_Class30004] of  Bebida
 
@@ -855,12 +924,12 @@
 
 	(Alcoholica TRUE)
 	(Nombre "Anna de Codorniu Blanc de Blancs (Cava)")
-	(Precio 25.35))
+	(Precio 15.35))
 
 ([Catering_Class30012] of  Bebida
 
 	(Alcoholica TRUE)
-	(Nombre "Viña Sol (Vino tinto)")
+	(Nombre "Viña Sol (Vino tinto, D.O. Rioja)")
 	(Precio 12.2))
 
 ([Catering_Class30013] of  Bebida
@@ -888,7 +957,7 @@
 ([Catering_Class30017] of  Bebida
 
 	(Alcoholica TRUE)
-	(Nombre "Vega Sicilia \"Único\" (Vino tinto)")
+	(Nombre "Vega Sicilia \"Único\" (Vino tinto, D.O. Rioja)")
 	(Precio 220.0))
 
 ([Catering_Class30018] of  Bebida
@@ -900,12 +969,12 @@
 ([Catering_Class30019] of  Bebida
 
 	(Alcoholica TRUE)
-	(Nombre "Taittinger Brut Prestige Rosé (Champagne rosado)")
+	(Nombre "Taittinger Brut Prestige Rosé (Champagne rosado, D.O. Reims)")
 	(Precio 46.3))
 
 ([Catering_Class30020] of  Plato
 
-	(BebidaAsociada [Catering_Class1])
+	(BebidaAsociada [Catering_Class40033])
 	(Complejo TRUE)
 	(Estacion Primavera Verano)
 	(Ligero TRUE)
@@ -918,6 +987,7 @@
 
 ([Catering_Class30021] of  Plato
 
+	(BebidaAsociada [Catering_Class40024])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Invierno Otono)
@@ -929,17 +999,20 @@
 
 ([Catering_Class30022] of  Plato
 
+	(BebidaAsociada [Catering_Class40026])
 	(Clasico TRUE)
 	(Estacion Verano Otono Invierno Primavera)
 	(Ligero TRUE)
 	(Nombre "Steak tartar")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30022])
 	(Precio 16.0)
 	(Sibarita TRUE)
 	(TipoPlato "Carne"))
 
 ([Catering_Class30023] of  Plato
 
+	(BebidaAsociada [Catering_Class40033])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -951,15 +1024,18 @@
 
 ([Catering_Class30024] of  Plato
 
+	(BebidaAsociada [Catering_Class0])
 	(Caliente TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "Valencia")
 	(Nombre "\"Rossejat\" de fideos")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30024])
 	(Precio 18.65))
 
 ([Catering_Class30025] of  Plato
 
+	(BebidaAsociada [Catering_Class40049])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -972,6 +1048,7 @@
 
 ([Catering_Class30026] of  Plato
 
+	(BebidaAsociada [Catering_Class40046])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -985,6 +1062,7 @@
 
 ([Catering_Class30027] of  Plato
 
+	(BebidaAsociada [Catering_Class40052])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -998,6 +1076,7 @@
 
 ([Catering_Class30028] of  Plato
 
+	(BebidaAsociada [Catering_Class40046])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -1010,6 +1089,7 @@
 
 ([Catering_Class30029] of  Plato
 
+	(BebidaAsociada [Catering_Class40052])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -1023,10 +1103,12 @@
 
 ([Catering_Class30030] of  Plato
 
+	(BebidaAsociada [Catering_Class40033])
 	(Caliente TRUE)
 	(Clasico FALSE)
 	(Complejo TRUE)
 	(Estacion Invierno Otono)
+	(Ligero TRUE)
 	(LugarPlato "País Vasco")
 	(Nombre "Kokotxas en salsa verde")
 	(OrdenPlato Segundo)
@@ -1036,6 +1118,7 @@
 
 ([Catering_Class30031] of  Plato
 
+	(BebidaAsociada [Catering_Class40042])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -1047,6 +1130,7 @@
 
 ([Catering_Class30032] of  Plato
 
+	(BebidaAsociada [Catering_Class30005])
 	(Caliente TRUE)
 	(Estacion Primavera Verano)
 	(Ligero TRUE)
@@ -1057,6 +1141,7 @@
 
 ([Catering_Class30033] of  Plato
 
+	(BebidaAsociada [Catering_Class40051])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono)
 	(Ligero TRUE)
@@ -1069,6 +1154,7 @@
 
 ([Catering_Class30034] of  Plato
 
+	(BebidaAsociada [Catering_Class40055])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Otono Invierno)
@@ -1082,6 +1168,7 @@
 
 ([Catering_Class30035] of  Plato
 
+	(BebidaAsociada [Catering_Class40046])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Invierno)
@@ -1093,6 +1180,7 @@
 
 ([Catering_Class30036] of  Plato
 
+	(BebidaAsociada [Catering_Class1])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -1105,6 +1193,7 @@
 
 ([Catering_Class30037] of  Plato
 
+	(BebidaAsociada [Catering_Class40033])
 	(Caliente TRUE)
 	(Complejo TRUE)
 	(Estacion Primavera Otono Invierno)
@@ -1116,6 +1205,7 @@
 
 ([Catering_Class30038] of  Plato
 
+	(BebidaAsociada [Catering_Class40004])
 	(Clasico FALSE)
 	(Complejo TRUE)
 	(Estacion Verano Primavera Otono Invierno)
@@ -1128,17 +1218,20 @@
 
 ([Catering_Class30039] of  Plato
 
+	(BebidaAsociada [Catering_Class40007])
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
 	(LugarPlato "Japon")
 	(Nombre "Tartar de atún con aguacate")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30039])
 	(Precio 14.0)
 	(Sibarita TRUE)
 	(TipoPlato "Pescado"))
 
 ([Catering_Class30040] of  Plato
 
+	(BebidaAsociada [Catering_Class30002])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -1147,14 +1240,17 @@
 	(LugarPlato "Francia")
 	(Nombre "Lenguado Menieur")
 	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class30040])
 	(Precio 25.0)
 	(Sibarita TRUE)
 	(TipoPlato "Pescado"))
 
 ([Catering_Class30041] of  Plato
 
+	(BebidaAsociada [Catering_Class40010])
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
 	(LugarPlato "Catalunya")
 	(Nombre "Carpaccio de rape, salmon y aguacate")
 	(OrdenPlato Primero)
@@ -1164,6 +1260,7 @@
 
 ([Catering_Class30042] of  Plato
 
+	(BebidaAsociada [Catering_Class40010])
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono)
 	(Ligero TRUE)
@@ -1176,6 +1273,7 @@
 
 ([Catering_Class30043] of  Plato
 
+	(BebidaAsociada [Catering_Class0])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo FALSE)
@@ -1184,10 +1282,12 @@
 	(LugarPlato "Malaga")
 	(Nombre "Chipirones a la malagueña")
 	(OrdenPlato Primero)
-	(Precio 18.0))
+	(Precio 18.0)
+	(TipoPlato "Pescado"))
 
 ([Catering_Class30044] of  Plato
 
+	(BebidaAsociada [Catering_Class3])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -1195,11 +1295,13 @@
 	(LugarPlato "Reino Unido")
 	(Nombre "Fish & Chips")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30044])
 	(Precio 6.0)
 	(TipoPlato "Pescado"))
 
 ([Catering_Class30045] of  Plato
 
+	(BebidaAsociada [Catering_Class40038])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -1212,6 +1314,7 @@
 
 ([Catering_Class30046] of  Plato
 
+	(BebidaAsociada [Catering_Class30007])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -1220,10 +1323,12 @@
 	(Nombre "Entrecot de Nebraska Black Angus")
 	(OrdenPlato Segundo)
 	(Precio 22.0)
+	(Sibarita TRUE)
 	(TipoPlato "Carne"))
 
 ([Catering_Class30047] of  Plato
 
+	(BebidaAsociada [Catering_Class40034])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -1231,21 +1336,25 @@
 	(Nombre "Costillas de cabrito a la milanesa")
 	(OrdenPlato Segundo)
 	(Precio 17.0)
+	(Sibarita FALSE)
 	(TipoPlato "Carne"))
 
 ([Catering_Class30048] of  Plato
 
+	(BebidaAsociada [Catering_Class40027])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "Austria")
 	(Nombre "Wienner Schnitzel")
 	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class30048])
 	(Precio 15.0)
 	(TipoPlato "Carne"))
 
 ([Catering_Class30049] of  Plato
 
+	(BebidaAsociada [Catering_Class40021])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -1253,11 +1362,13 @@
 	(LugarPlato "Alemania")
 	(Nombre "Sauerkraut")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30049])
 	(Precio 12.0)
 	(Vegetariano TRUE))
 
 ([Catering_Class30050] of  Plato
 
+	(BebidaAsociada [Catering_Class30007])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -1271,6 +1382,7 @@
 
 ([Catering_Class30051] of  Plato
 
+	(BebidaAsociada [Catering_Class40011])
 	(Caliente TRUE)
 	(Complejo TRUE)
 	(Estacion Otono Primavera Invierno)
@@ -1282,6 +1394,7 @@
 
 ([Catering_Class30052] of  Plato
 
+	(BebidaAsociada [Catering_Class40005])
 	(Caliente TRUE)
 	(Clasico FALSE)
 	(Estacion Primavera Verano Invierno Otono)
@@ -1295,6 +1408,7 @@
 
 ([Catering_Class30053] of  Plato
 
+	(BebidaAsociada [Catering_Class30003])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -1305,6 +1419,7 @@
 
 ([Catering_Class30054] of  Plato
 
+	(BebidaAsociada [Catering_Class40036])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Otono Invierno)
@@ -1317,6 +1432,7 @@
 
 ([Catering_Class30055] of  Plato
 
+	(BebidaAsociada [Catering_Class30014])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -1329,6 +1445,7 @@
 
 ([Catering_Class30056] of  Plato
 
+	(BebidaAsociada [Catering_Class30013])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
@@ -1351,6 +1468,7 @@
 
 ([Catering_Class30060] of  Plato
 
+	(BebidaAsociada [Catering_Class40008])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Complejo TRUE)
@@ -1358,12 +1476,393 @@
 	(LugarPlato "España")
 	(Nombre "Arroz caldoso de pescador")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30060])
 	(Precio 24.0)
 	(Sibarita FALSE)
 	(TipoPlato "Pescado"))
 
+([Catering_Class40004] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Javier Sanz (Vino blanco, D.O. Rueda)")
+	(Precio 16.0))
+
+([Catering_Class40005] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Fanomenal (Vino blanco, D.O. Rueda)")
+	(Precio 15.6))
+
+([Catering_Class40006] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Viña El Torreón (Vino blanco, D.O. Rueda)")
+	(Precio 11.3))
+
+([Catering_Class40007] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Pedalier (Vino blanco, D.O. Rías Baixas)")
+	(Precio 13.0))
+
+([Catering_Class40008] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Marieta  (Vino blanco, D.O. Rías Baixas)")
+	(Precio 13.1))
+
+([Catering_Class40010] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "La Trucha (Vino blanco, D.O. Rías Baixas)")
+	(Precio 14.6))
+
+([Catering_Class40011] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Finca Fabián  (Vino blanco, D.O. La Mancha)")
+	(Precio 13.5))
+
+([Catering_Class40012] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Finca Fabián  (Vino rosado, D.O. La Mancha)")
+	(Precio 13.2))
+
+([Catering_Class40013] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Libido (Vino rosado, D.O. Navarra)")
+	(Precio 13.4))
+
+([Catering_Class40014] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Sierra Cantabria (Vino rosado, D.O. La Rioja)")
+	(Precio 11.1))
+
+([Catering_Class40015] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Pere Ventura Cupatge d'Honor Rosé (Cava, D.O. Valencia)")
+	(Precio 24.0))
+
+([Catering_Class40016] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Ses Nines (Vino tinto, D.O. Binissalem, Mallorca)")
+	(Precio 16.0))
+
+([Catering_Class40017] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Butibalausí (Vino tinto, V.T. Mallorca)")
+	(Precio 14.2))
+
+([Catering_Class40018] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "8 Vents (Vino tinto, V.T. Mallorca)")
+	(Precio 20.0))
+
+([Catering_Class40019] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "XIII Lunas Crianza (Vino tinto,D.O. La Mancha)")
+	(Precio 11.5))
+
+([Catering_Class40020] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Bicicletas y Demonios (Vino tinto, D.O. Ribera del Duero)")
+	(Precio 11.2))
+
+([Catering_Class40021] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Dominio de Atauta (Vino tinto, D.O. Ribera del Duero)")
+	(Precio 29.0))
+
+([Catering_Class40022] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Carmelo Rodero 9 meses (Vino tinto, D.O. Ribera del Duero)")
+	(Precio 18.5))
+
+([Catering_Class40023] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Cyan Roble (Vino tinto, D.O. Toro)")
+	(Precio 16.0))
+
+([Catering_Class40024] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "El Pícaro (Vino tinto, D.O. Toro)")
+	(Precio 16.2))
+
+([Catering_Class40025] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Glorioso Crianza (Vino tinto, D.O. La Rioja)")
+	(Precio 18.0))
+
+([Catering_Class40026] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Ramón Bilbao Edicion Limitada (Vino tinto, D.O. La Rioja)")
+	(Precio 21.0))
+
+([Catering_Class40027] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Carlos Martínez (Vino tinto, D.O. La Rioja)")
+	(Precio 16.7))
+
+([Catering_Class40028] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Juan Gil 12 meses (Vino tinto, D.O. Jumilla)")
+	(Precio 22.0))
+
+([Catering_Class40029] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Alto Moncayo (Vino tinto, D.O. Campo de Borja)")
+	(Precio 40.0))
+
+([Catering_Class40030] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Les Terrases (Vino tinto, D.O. Priorat)")
+	(Precio 35.0))
+
+([Catering_Class40031] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Inici (Vino tinto, D.O. Priorat)")
+	(Precio 26.0))
+
+([Catering_Class40032] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Finca la Cuesta (Vino tinto, D.O. Bierzo)")
+	(Precio 17.9))
+
+([Catering_Class40033] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Ermita d'Espiells (Vino blanco, D.O. Penedès)")
+	(Precio 8.0))
+
+([Catering_Class40034] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Moustillant (Vino blanco, D.O. Penedes)")
+	(Precio 8.0))
+
+([Catering_Class40035] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Masia Bach Estrissimo (Vino blanco, D.O. Catalunya)")
+	(Precio 19.0))
+
+([Catering_Class40036] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Galets Rouges (Vino tinto, D.O. Francia)")
+	(Precio 18.0))
+
+([Catering_Class40037] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Chateau Montelena Estate (Vino tinto, D.O. California)")
+	(Precio 26.0))
+
+([Catering_Class40038] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Araujo Eisele Vineyard (Vino tinto, D.O. California)")
+	(Precio 25.0))
+
+([Catering_Class40039] of  Bebida
+
+	(Nombre "Mezzo Mix (Soda)")
+	(Precio 4.0))
+
+([Catering_Class40040] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Santa Digna (Vino rosado, D.O. Valle Central)")
+	(Precio 7.9))
+
+([Catering_Class40041] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Santa Digna (Vino blanco, D.O. Valle Central)")
+	(Precio 7.5))
+
+([Catering_Class40042] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Castell d'Encús SO2 (Vino blanc, D.O. Costers del Segre)")
+	(Precio 21.3))
+
+([Catering_Class40044] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Campo di Fiori (Lambrusco, D.O. Italia)")
+	(Precio 3.0))
+
+([Catering_Class40045] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Roger de Flor Brut Nature (Cava, D.O. Catalunya)")
+	(Precio 4.0))
+
+([Catering_Class40046] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Castillo Perelada (Vino blanco, D.O. Empordà)")
+	(Precio 5.8))
+
+([Catering_Class40047] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Sumarroca (Vino rosado, D.O. Catalunya)")
+	(Precio 5.2))
+
+([Catering_Class40048] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Sumarroca Blanc de Blancs (Vino blanco, D.O. Penedès)")
+	(Precio 4.25))
+
+([Catering_Class40049] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Babot Brut Nature (Cava, D.O. Catalunya)")
+	(Precio 5.1))
+
+([Catering_Class40050] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Josep Foraster Els Nanos Collita (Vino tinto, D.O. Conca de Barberà)")
+	(Precio 6.2))
+
+([Catering_Class40051] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Castillo de Monjardín Garnacha Viñas Viejas (Vino tinto, D.O. Navarra)")
+	(Precio 6.5))
+
+([Catering_Class40052] of  Bebida
+
+	(Alcoholica FALSE)
+	(Nombre "Castell del Remei Punt Zero (Vino tinto, D.O. Costers del Segre)")
+	(Precio 7.2))
+
+([Catering_Class40053] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Llopart Brut Rosé Reserva (Cava rosado, D.O. Catalunya)")
+	(Precio 7.0))
+
+([Catering_Class40054] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Llopart Brut Reserva (Cava, D.O. Catalunya)")
+	(Precio 9.0))
+
+([Catering_Class40055] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Lorenzo Cachazo Martivillí (Vino blanco, D.O. Rueda)")
+	(Precio 7.5))
+
+([Catering_Class40056] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Parés Baltà Honeymoon (Vino blanco, D.O. Penedès)")
+	(Precio 7.05))
+
+([Catering_Class40057] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Domaene Gobelsburg Niederösterreich Zweigelt (Vino tinto, D.O. Kamptal)")
+	(Precio 8.95))
+
+([Catering_Class40058] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "El Xitxarel·lo (Vino blanco, D.O. Penedès)")
+	(Precio 8.95))
+
+([Catering_Class40059] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Pizzolato Prosecco Treviso (Prosecco, D.O. Veneto)")
+	(Precio 9.95))
+
+([Catering_Class40060] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Perlino Fragolino Rosso (Lambrusco, D.O. Italia)")
+	(Precio 4.95))
+
+([Catering_Class40061] of  Bebida
+
+	(Alcoholica TRUE)
+	(Nombre "Tenuta di Petrolo Inarno (Lambrusco, D.O. Italia)")
+	(Precio 11.95))
+
+([Catering_Class40063] of  Bebida
+
+	(Nombre "Agua del grifo")
+	(Precio 0.0))
+
+([Catering_Class40064] of  Plato
+
+	(BebidaAsociada [Catering_Class40049])
+	(Clasico TRUE)
+	(Estacion Otono Invierno Primavera Verano)
+	(Ligero TRUE)
+	(LugarPlato "Francia")
+	(Nombre "Milhojas de fresitas")
+	(OrdenPlato Postre)
+	(Precio 18.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class40065] of  Plato
+
+	(BebidaAsociada [Catering_Class40059])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Galicia")
+	(Nombre "Queso tetilla con membrillo")
+	(OrdenPlato Postre)
+	(Precio 25.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class40066] of  Plato
+
+	(BebidaAsociada [Catering_Class40039])
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(LugarPlato "Estados Unidos")
+	(Nombre "Hamburgusa premium")
+	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class40066])
+	(Precio 20.0)
+	(Sibarita TRUE))
+
 ([Catering_Class5] of  Plato
 
+	(BebidaAsociada [Catering_Class40020])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -1374,6 +1873,7 @@
 
 ([Catering_Class6] of  Plato
 
+	(BebidaAsociada [Catering_Class40044])
 	(Caliente TRUE)
 	(Clasico FALSE)
 	(Complejo TRUE)
@@ -1387,6 +1887,7 @@
 
 ([Catering_Class7] of  Plato
 
+	(BebidaAsociada [Catering_Class30002])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -1399,6 +1900,7 @@
 
 ([Catering_Class8] of  Plato
 
+	(BebidaAsociada [Catering_Class40061])
 	(Clasico TRUE)
 	(Estacion Verano Primavera)
 	(Ligero TRUE)
@@ -1410,6 +1912,7 @@
 
 ([Catering_Class9] of  Plato
 
+	(BebidaAsociada [Catering_Class0])
 	(Caliente TRUE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
@@ -1421,12 +1924,14 @@
 
 
 
-	
+
+
+
 	)
 ;;;;;;;;;;; CODIGO CLIPS  ;;;;;;;;;;;;;
 ;;****************
 ;;* DEFTEMPLATES *
-;;**************** 
+;;****************
 ;numMenu1 = barat
 ;numMenu2 = intermig
 ;numMenu3 = car
@@ -1436,39 +1941,39 @@
 	(slot segundo-plato)
 	(slot postre)
 	(multislot lista-bebidas))
-	
+
 ;;****************
 ;;* DEFFUNCTIONS *
 ;;****************
 (deffunction ask-question (?question $?allowed-values)
    (printout t ?question)
    (bind ?answer (read))
-   (if (lexemep ?answer) 
+   (if (lexemep ?answer)
        then (bind ?answer (lowcase ?answer)))
    (while (not (member ?answer ?allowed-values)) do
       (printout t ?question)
       (bind ?answer (read))
-      (if (lexemep ?answer) 
+      (if (lexemep ?answer)
           then (bind ?answer (lowcase ?answer))))
    ?answer)
 
 (deffunction yes-or-no-p (?question)
    (bind ?response (ask-question ?question Si si No no S s N n))
    (if (or (eq ?response Si) (eq ?response si) (eq ?response S) (eq ?response s))
-       then TRUE 
+       then TRUE
        else FALSE))
-	   
+
 (deffunction esComida (?question)
    (bind ?response (ask-question ?question Comida comida Cena cena))
    (if (or (eq ?response Comida) (eq ?response comida))
-       then TRUE 
+       then TRUE
        else FALSE)
 )
-	   
+
 (deffunction esFamiliar (?question)
    (bind ?response (ask-question ?question Familiar familiar Congreso congreso))
    (if (or (eq ?response Familiar) (eq ?response familiar))
-       then TRUE 
+       then TRUE
        else FALSE)
 )
 
@@ -1480,22 +1985,27 @@
    (return ?ins)
 )
 
-(deffunction calcularPrecio (?p1 ?p2 ?p3 ?b)
-	(bind ?precio (+ (send ?p1 get-Precio) (send ?p2 get-Precio) (send ?p3 get-Precio) (send ?b get-Precio)))
-)      
+(deffunction calcularPrecio (?p1 ?p2 ?p3 ?bebidas)
+	(bind ?sumBebidas 0)
+	(loop-for-count (?i 1 (length$ ?bebidas))
+		(bind ?var (nth$ ?i ?bebidas))
+		(bind ?sumBebidas (+ (send ?var get-Precio) ?sumBebidas))
+	)
+	(bind ?precio (+ (send ?p1 get-Precio) (send ?p2 get-Precio) (send ?p3 get-Precio) ?sumBebidas))
+)
 
 (deffunction getMenu (?nMenu ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax)
 
    (bind ?preuAcum 0)
-  
+
    (if (eq ?te Congreso) ;;; En un congreso, cualquier bebida alcoholicas y no alcoholicas
     then (bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE ))
     ; si no complejo (mucha gente) no alcoholicas
     else (bind ?bebidas (find-all-instances ((?inst Bebida)) (not (eq ?inst:Alcoholica TRUE)) ))
     )
-    
+
     (if (eq ?l si)
-    then 
+    then
         (if (eq ?v si)
 		  ;ES VEGETARIANO
           then (if (eq ?c si) ;poca gente -> comida compleja o no
@@ -1503,7 +2013,7 @@
 				else (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero TRUE) (eq ?inst:Vegetariano TRUE) (not (eq ?inst:Complejo TRUE)))))
 			) ;FINAL IF COMPLEJO
 		  ;NO ES VEGETARIANO
-          else (if (eq ?c si) 
+          else (if (eq ?c si)
 					then (bind ?platos (find-all-instances ((?inst Plato)) (eq ?inst:Ligero TRUE)))
 					else (bind ?platos (find-all-instances ((?inst Plato)) (and (eq ?inst:Ligero TRUE) (not (eq ?inst:Complejo TRUE)))))
 			)
@@ -1522,39 +2032,39 @@
 			)
         )
     )
-    
+
 	(if (eq ?re si)
 	then
-   (bind ?platosaux (create$ ))   
+   (bind ?platosaux (create$ ))
 
-		(loop-for-count (?i 1 (length ?platos))     
+		(loop-for-count (?i 1 (length ?platos))
 			(bind ?var (nth$ ?i ?platos))
 			(if (not (eq (send ?var get-LugarPlato) "" ))
-			then 
-				(insert$ ?platosaux 1 ?var)
+			then
+				(bind ?platosaux (insert$ ?platosaux 1 ?var))
 			)
 		)
-		
+
 		(bind ?platos ?platosaux)
-		
+
 	)
-	
+
 	(if (eq ?s si)
 	then
-        (bind ?platosaux (create$ ))   
+        (bind ?platosaux (create$ ))
 
-		(loop-for-count (?i 1 (length ?platos))     
+		(loop-for-count (?i 1 (length ?platos))
 			(bind ?var (nth$ ?i ?platos))
 			(if (eq (send ?var get-Sibarita) TRUE )
-			then 
-				(insert$ ?platosaux 1 ?var)
+			then
+				(bind ?platosaux (insert$ ?platosaux 1 ?var))
 			)
 		)
-		
+
 		(bind ?platos ?platosaux)
-		
+
 	)
-		
+
 	(bind ?intrvPrecio (- ?pMax ?pMin))
 
 	;Definicio dels intervals dels menus
@@ -1563,34 +2073,65 @@
 	(bind ?minIntrv2 ?maxIntrv1)
 	(bind ?maxIntrv2 (+ ?pMin (* 0.6666667 ?intrvPrecio)))
 	(bind ?minIntrv3 ?maxIntrv2)
-	(bind ?maxIntrv3 ?pMax)	
-	
-   (printout t crlf)
-   (printout t "Menu " ?nMenu crlf)
-   (printout t "Bebida: " )
+	(bind ?maxIntrv3 ?pMax)
+
+   ;(printout t crlf)
+   ;(printout t "Menu " ?nMenu crlf)
+   ;(printout t "Bebida: " )
+
    ;UNA BEBIDA PARA TODO EL MENU
    (if (not (eq ?s si))
-    then (bind ?bebida (random-elem ?bebidas) )
-		 (bind ?preuAcum (+ ?preuAcum (send ?bebida get-Precio)))
-		  (printout t (send ?bebida get-Nombre) crlf)
+    then
+		(bind ?bebidasBaratas (create$ ))
+	    (loop-for-count (?i 1 (length ?bebidas))
+	 		(bind ?var (nth$ ?i ?bebidas))
+			(if (<= (send ?var get-Precio) (* 0.05 ?pMax))
+				then (bind ?bebidasBaratas (insert$ ?bebidasBaratas 1 ?var))
+			)
+		)
+
+		(if (not (eq 0 (length ?bebidasBaratas)))
+			then (bind ?bebida (random-elem ?bebidasBaratas) )
+			     (bind ?preuAcum (+ ?preuAcum (send ?bebida get-Precio)))
+				 ;(printout t (send ?bebida get-Nombre) crlf)
+
+			else (printout t "No hay suficientes platos para cumplir las restricciones para el menu " ?nMenu crlf)
+		)
+
 	;UNA BEBIDA PARA CADA PLATO
-	else ( 
-		if (eq ?te Familiar)
-		then (bind ?bebidaprimero (random-elem ?bebidas))
-		then (bind ?bebidasegundo (random-elem ?bebidas))
-		then (bind ?bebidapostre (random-elem ?bebidas))
+	;SIBARITA Y FAMILIAR
+	else ( if (eq ?te Familiar)
+			then (bind ?bebidasBaratas (create$ ))
+	 	    	(loop-for-count (?i 1 (length ?bebidas))
+	 	 			(bind ?var (nth$ ?i ?bebidas))
+	 				(if (<= (send ?var get-Precio) (* 0.05 ?pMax))
+	 					then (bind ?bebidasBaratas (insert$ ?bebidasBaratas 1 ?var))
+	 				)
+	 			)
+				(if (not (eq 0 (length ?bebidasBaratas)))
+	 			then ;(bind ?bebida (random-elem ?bebidasBaratas) )
+					(bind ?bebidaprimero (random-elem ?bebidasBaratas))
+				 	(bind ?bebidasegundo (random-elem ?bebidasBaratas))
+				 	(bind ?bebidapostre (random-elem ?bebidasBaratas))
+	 			    (bind ?preuAcum (+ ?preuAcum (send ?bebidaprimero get-Precio)))
+					(bind ?preuAcum (+ ?preuAcum (send ?bebidasegundo get-Precio)))
+					(bind ?preuAcum (+ ?preuAcum (send ?bebidapostre get-Precio)))
+	 				 ;(printout t (send ?bebida get-Nombre) crlf)
+
+	 			else (printout t "No hay suficientes platos para cumplir las restricciones para el menu " ?nMenu crlf)
+	 		)
 		)
 	)
-	
-   
-   (bind ?primeros (create$ ))   
-   (loop-for-count (?i 1 (length ?platos))     
+
+
+   (bind ?primeros (create$ ))
+   (loop-for-count (?i 1 (length ?platos))
 		(bind ?var (nth$ ?i ?platos))
 		(bind ?ordenes (send ?var get-OrdenPlato))
-		(bind ?estaciones (send ?var get-Estacion)) 
+		(bind ?estaciones (send ?var get-Estacion))
 		(bind ?preuAct (send ?var get-Precio))
-		
-		
+
+
 		(if (eq ?s si)
 		then ( if (eq ?te Congreso)
 				then  	 (bind ?bebidaAct (send ?var get-BebidaAsociada) )
@@ -1598,34 +2139,33 @@
 
 				else (bind ?preuAct (+ (send ?bebidaprimero get-Precio) (send ?var get-Precio)))
 			)
+		)
 
-		)		
-		
-		
+
 		(if (and (member Primero ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv1)) (<= ?preuAct (* 0.4 ?maxIntrv1)) (eq ?nMenu 1))
 			then(bind ?primeros (insert$ ?primeros 1 ?var))
-			
+
 		)
 		(if (and (member Primero ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv2)) (<= ?preuAct (* 0.4 ?maxIntrv2)) (eq ?nMenu 2))
 			then(bind ?primeros (insert$ ?primeros 1 ?var))
 
-			(printout t (send ?var get-Nombre) crlf )			
+			;(printout t (send ?var get-Nombre) crlf )
 		)
 		(if (and (member Primero ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv3)) (<= ?preuAct (* 0.4 ?maxIntrv3)) (eq ?nMenu 3))
 			then(bind ?primeros (insert$ ?primeros 1 ?var))
 		)
 	)
 	;(printout t ?primeros crlf)
-   
-  
-   (bind ?segundos (create$ ))   
-   (loop-for-count (?i 1 (length ?platos))     
+
+
+   (bind ?segundos (create$ ))
+   (loop-for-count (?i 1 (length ?platos))
 		(bind ?var (nth$ ?i ?platos))
 		(bind ?ordenes (send ?var get-OrdenPlato))
-		(bind ?estaciones (send ?var get-Estacion)) 
+		(bind ?estaciones (send ?var get-Estacion))
 		(bind ?preuAct (send ?var get-Precio))
-		
-		
+
+
 		(if (eq ?s si)
 		then ( if (eq ?te Congreso)
 				then  	 (bind ?bebidaAct (send ?var get-BebidaAsociada) )
@@ -1634,34 +2174,34 @@
 				else (bind ?preuAct (+ (send ?bebidasegundo get-Precio) (send ?var get-Precio)))
 			)
 
-		)		
+		)
 
 		(if (and (member Segundo ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv1)) (<= ?preuAct (* 0.4 ?maxIntrv1)) (eq ?nMenu 1))
 			then(bind ?segundos (insert$ ?segundos 1 ?var)
-		)			
+		)
 		)
 		(if (and (member Segundo ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv2)) (<= ?preuAct (* 0.4 ?maxIntrv2)) (eq ?nMenu 2))
-			
+
 			then(bind ?segundos (insert$ ?segundos 1 ?var))
 
-			(printout t (send ?var get-Nombre) crlf)
+			;(printout t (send ?var get-Nombre) crlf)
 		)
 		(if (and (member Segundo ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.4 ?minIntrv3)) (<= ?preuAct (* 0.4 ?maxIntrv3)) (eq ?nMenu 3))
 			then(bind ?segundos (insert$ ?segundos 1 ?var)
 		)
 		)
 	)
-	
-	(printout t crlf)
-  
-   
-   (bind ?postres (create$ ))   
-   (loop-for-count (?i 1 (length ?platos))     
+
+	;(printout t crlf)
+
+
+   (bind ?postres (create$ ))
+   (loop-for-count (?i 1 (length ?platos))
 		(bind ?var (nth$ ?i ?platos))
 		(bind ?ordenes (send ?var get-OrdenPlato))
-		(bind ?estaciones (send ?var get-Estacion)) 
+		(bind ?estaciones (send ?var get-Estacion))
 		(bind ?preuAct (send ?var get-Precio))
-		
+
 		(if (eq ?s si)
 		then ( if (eq ?te Congreso)
 				then  	 (bind ?bebidaAct (send ?var get-BebidaAsociada) )
@@ -1670,101 +2210,108 @@
 				else (bind ?preuAct (+ (send ?bebidapostre get-Precio) (send ?var get-Precio)))
 			)
 
-		)		
+		)
 
 		(if (and (member Postre ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.2 ?minIntrv1)) (<= ?preuAct (* 0.2 ?maxIntrv1)) (eq ?nMenu 1))
 			then(bind ?postres (insert$ ?postres 1 ?var))
 		)
 		(if (and (member Postre ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.2 ?minIntrv2)) (<= ?preuAct (* 0.2 ?maxIntrv2))  (eq ?nMenu 2))
 			then(bind ?postres (insert$ ?postres 1 ?var))
-			
-			(printout t (send ?var get-Nombre))
+
+			;(printout t (send ?var get-Nombre))
 		)
 		(if (and (member Postre ?ordenes) (member ?e ?estaciones) (>= ?preuAct (* 0.2 ?minIntrv3)) (<= ?preuAct (* 0.2 ?maxIntrv3))  (eq ?nMenu 3))
 			then(bind ?postres (insert$ ?postres 1 ?var))
 		)
 	)
-	;(bind ?postres (insert$ ?postres 1 (random-elem ?primeros)))
-	(if  (or (eq 0 (length ?primeros))(eq 0 (length ?segundos))(eq 0 (length ?postres))) ;FALTA MIRAR BEBIDAS
-		then (printout t "No hay suficientes platos para cumplir las restricciones" crlf)
-		else (printout t "Primero: " )
-			   (bind ?primero (random-elem ?primeros) ) 
-			   (bind ?listbebidas (create$ ))   
+
+	(printout t "Length primero: " (length ?primeros) crlf)
+	(printout t "Length segundo: " (length ?segundos) crlf)
+	(printout t "Length postre: " (length ?postres) crlf)
+
+	(if  (or (eq 0 (length ?primeros))(eq 0 (length ?segundos))(eq 0 (length ?postres)))
+		then (printout t "No hay suficientes platos para cumplir las restricciones para el menu " ?nMenu crlf)
+		else ;(printout t "Primero: " )
+			   (bind ?primero (random-elem ?primeros) )
+			   (bind ?listbebidas (create$ ))
 
 			   (if (eq ?s si)
-				   then (if (eq ?te Congreso) 
+				   then (if (eq ?te Congreso)
 						then (bind ?listbebidas (insert$ ?listbebidas 1 (send ?primero get-BebidaAsociada)) )
 						else (bind ?listbebidas (insert$ ?listbebidas 1 ?bebidaprimero))
 
 						)
 				)
 			   (bind ?preuAcum (+ ?preuAcum (send ?primero get-Precio)))
-			   
-			   (bind ?segundoscompatibles (create$ ))   
+			   ;(printout t (send ?primero get-Nombre) crlf)
 
-			   (loop-for-count (?i 1 (length ?segundos))     
+			   (bind ?segundoscompatibles (create$ ))
+
+			   (loop-for-count (?i 1 (length ?segundos))
 					(bind ?var (nth$ ?i ?segundos))
 					(if (not(member ?var (send ?primero get-PlatosNoCompatibles)))
-						then (insert$ ?segundoscompatibles 1 ?var)
+						then (bind ?segundoscompatibles (insert$ ?segundoscompatibles 1 ?var))
 					)
 				)
-			   (printout t "Segundo: " )
-			   (bind ?segundo (random-elem ?segundoscompatibles) ) 
-	
+			   ;(printout t "Segundo: " )
+			   (bind ?segundo (random-elem ?segundoscompatibles) )
+
 			   (if (eq ?s si)
-				   then (if (eq ?te Congreso) 
+				   then (if (eq ?te Congreso)
 						then (bind ?listbebidas (insert$ ?listbebidas 1 (send ?segundo get-BebidaAsociada)) )
 						else (bind ?listbebidas (insert$ ?listbebidas 1 ?bebidasegundo))
 						)
 
 				)
-	
-			   (bind ?preuAcum (+ ?preuAcum (send ?segundo get-Precio)))
-			   (printout t (send ?segundo get-Nombre) crlf)
-   
-			   (printout t "Postre: " )
-			   
-			   (bind ?postrescompatibles (create$ ))   
 
-			   (loop-for-count (?i 1 (length ?postres))     
+			   (bind ?preuAcum (+ ?preuAcum (send ?segundo get-Precio)))
+			   ;(printout t (send ?segundo get-Nombre) crlf)
+
+			   ;(printout t "Postre: " )
+
+			   (bind ?postrescompatibles (create$ ))
+
+			   (loop-for-count (?i 1 (length ?postres))
 					(bind ?var (nth$ ?i ?postres))
 					(if (and (not(member ?var (send ?primero get-PlatosNoCompatibles))) (not(member ?var (send ?segundo get-PlatosNoCompatibles))))
-						then (insert$ ?postrescompatibles 1 ?var)
+						then (bind ?postrescompatibles (insert$ ?postrescompatibles 1 ?var))
 					)
 				)
-			   
-			   (bind ?postre (random-elem ?postrescompatibles) )	 
-			   
+
+			   (bind ?postre (random-elem ?postrescompatibles) )
+
 			   (if (eq ?s si)
-				   then (if (eq ?te Congreso) 
+				   then (if (eq ?te Congreso)
 						then (bind ?listbebidas (insert$ ?listbebidas 1 (send ?postre get-BebidaAsociada)) )
 						else (bind ?listbebidas (insert$ ?listbebidas 1 ?bebidapostre))
 						)
 				)
 			   (bind ?preuAcum (+ ?preuAcum (send ?postre get-Precio)))
-			   (printout t (send ?postre get-Nombre) crlf)
-				
-				
-			   (if (eq ?s si) 
+			   ;(printout t (send ?postre get-Nombre) crlf)
+
+
+			   (if (eq ?s si)
 				then (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?listbebidas)))
-					
-					(printout t "calcular precio -")
+
+					;(printout t "calcular precio -" crlf)
+					;(printout t (calcularPrecio ?primero ?segundo ?postre ?listbebidas))
+
 				else (assert (menu (numMenu ?nMenu) (primer-plato ?primero) (segundo-plato ?segundo) (postre ?postre) (lista-bebidas ?bebida)))
-					(printout t (calcularPrecio ?primero ?segundo ?postre ?bebida))
-				
+					;(printout t (calcularPrecio ?primero ?segundo ?postre ?bebida))
+
 			   )
-	) 
-  
+	)
+
    ;(bind ?precio (send ?postre get-Precio))
    ;(printout t ?precio)
   )
- 
+
 ;;;;;;;;;;;;;;  QUERIES ;;;;;;;;;;;;;;;;
 ; SALIENCE = 10
 
 (defrule preguntar-tipo-evento
  (declare (salience 10))
- => 
+ =>
  (if (esComida "¿Es una comida o una cena?(Comida/Cena)")
   then (if (esFamiliar "¿Es un evento familiar o un congreso?(Familiar/Congreso)")
 		  then (assert (tipoEvento Familiar)) (assert (turno Comida))
@@ -1784,7 +2331,7 @@
  (printout t "Primavera" crlf)
  (printout t "Verano" crlf)
  (printout t "Otono" crlf)
- (printout t "Invierno" crlf) 
+ (printout t "Invierno" crlf)
  (bind ?estacion (read))
  (assert (estacion ?estacion))
 )
@@ -1794,7 +2341,7 @@
  =>
  (printout t "¿Cuantos comensales?")
  (bind ?numComs (read))
- (assert (numComs ?numComs)) 
+ (assert (numComs ?numComs))
 )
 
 (defrule preguntar-precio-max
@@ -1802,7 +2349,7 @@
  =>
  (printout t "¿Cual es el maximo presupuesto por persona?")
  (bind ?precioMax (read))
- (assert (precioMax ?precioMax)) 
+ (assert (precioMax ?precioMax))
 )
 
 (defrule preguntar-precio-min
@@ -1810,7 +2357,7 @@
  =>
  (printout t "¿Cual es el minimo presupuesto por persona?")
  (bind ?precioMin (read))
- (assert (precioMin ?precioMin)) 
+ (assert (precioMin ?precioMin))
 )
 
 (defrule preguntar-vegetariano
@@ -1818,25 +2365,25 @@
  =>
  (if (yes-or-no-p "¿Quieres un menu vegetariano?(si/no)")
  then (assert (vegetariano si))
- else (assert (vegetariano no)) 
+ else (assert (vegetariano no))
  )
  )
- 
+
  (defrule preguntar-sibarita
  (declare (salience 10))
  =>
  (if (yes-or-no-p "¿Quieres un menu sibarita?(si/no)")
  then (assert (sibarita si))
- else (assert (sibarita no)) 
+ else (assert (sibarita no))
  )
  )
- 
+
  (defrule preguntar-regional
  (declare (salience 10))
  =>
  (if (yes-or-no-p "¿Quieres un menu con platos de diferentes regiones?(si/no)")
  then (assert (regional si))
- else (assert (regional no)) 
+ else (assert (regional no))
  )
  )
 
@@ -1866,19 +2413,8 @@
    )
 )
 
-
-
-;;; Comented for the prototype
-; (defrule multiplesBebidas
-   ; (complejo)
-   ; =>
-   ; (assert (multiplesBebidas))
-; )
-
-
 ;;;;;;;;;; FINAL ;;;;;;;;;;;;;;;;
 ; SALIENCE -10
-;(defglobal <var>)
 ; Preus dels menus:
 ; Barat -> sum(plats >= minim)
 ; Intermig -> sum (plats >= minim <= maxim)
@@ -1896,14 +2432,31 @@
    (tipoEvento ?te)
    (regional ?re)
 	=>
-	(bind ?aux (getMenu 1 ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax))
-	(bind ?aux (getMenu 2 ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax))
-	(bind ?aux (getMenu 3 ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax))
+	(getMenu 1 ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax)
+	(getMenu 2 ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax)
+	(getMenu 3 ?c ?l ?v ?e ?s ?te ?re ?pMin ?pMax)
 )
 
-; (defrule getBebidas
-	; (declare (salience 40))
-	; =>
-	; (bind ?bebidas (find-all-instances ((?inst Bebida)) TRUE )) ;;;(> (?inst:Precio) 0)	
-	; (printout t ?bebidas)	
-; )
+(defrule printMenu
+    ?menu <- (menu (numMenu ?n) (primer-plato ?p1) (segundo-plato ?s1) (postre ?po1) (lista-bebidas $?bs1))
+	;(menu (numMenu 2) (primer-plato ?p2) (segundo-plato ?s2) (postre ?po2) (lista-bebidas ?bs2))
+	;(menu (numMenu 3) (primer-plato ?p3) (segundo-plato ?s3) (postre ?po3) (lista-bebidas ?bs3))
+	=>
+
+	(printout t "Menu " ?n ": " crlf)
+	(printout t "Bebida(s): " )
+	(loop-for-count (?i 1 (length$ ?bs1))
+		(bind ?var (nth$ ?i ?bs1))
+		(printout t (send ?var get-Nombre) ", ")
+	)
+	;(bind ?bebidas (implode$ ?bs1))
+	;(printout t ?bs1 crlf)
+	;(printout t ?bebidas crlf)
+	(printout t crlf)
+	(printout t "Primer plato: " (send ?p1 get-Nombre) crlf)
+	(printout t "Segundo plato: " (send ?s1 get-Nombre) crlf)
+	(printout t "Postre: " (send ?po1 get-Nombre) crlf)
+	(printout t "Precio: " (calcularPrecio ?p1 ?s1 ?po1 ?bs1) crlf crlf)
+	(retract ?menu)
+
+)

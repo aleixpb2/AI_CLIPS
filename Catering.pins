@@ -1,4 +1,4 @@
-; Sun May 21 09:24:50 CEST 2017
+; Sun May 21 11:56:58 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -629,6 +629,7 @@
 	(LugarPlato "Asturias")
 	(Nombre "Fabada")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30000])
 	(Precio 8.0))
 
 ([Catering_Class30002] of  Bebida
@@ -767,6 +768,7 @@
 	(Ligero TRUE)
 	(Nombre "Steak tartar")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30022])
 	(Precio 16.0)
 	(Sibarita TRUE)
 	(TipoPlato "Carne"))
@@ -791,6 +793,7 @@
 	(LugarPlato "Valencia")
 	(Nombre "\"Rossejat\" de fideos")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30024])
 	(Precio 18.65))
 
 ([Catering_Class30025] of  Plato
@@ -984,6 +987,7 @@
 	(LugarPlato "Japon")
 	(Nombre "Tartar de atún con aguacate")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30039])
 	(Precio 14.0)
 	(Sibarita TRUE)
 	(TipoPlato "Pescado"))
@@ -999,6 +1003,7 @@
 	(LugarPlato "Francia")
 	(Nombre "Lenguado Menieur")
 	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class30040])
 	(Precio 25.0)
 	(Sibarita TRUE)
 	(TipoPlato "Pescado"))
@@ -1053,6 +1058,7 @@
 	(LugarPlato "Reino Unido")
 	(Nombre "Fish & Chips")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30044])
 	(Precio 6.0)
 	(TipoPlato "Pescado"))
 
@@ -1105,6 +1111,7 @@
 	(LugarPlato "Austria")
 	(Nombre "Wienner Schnitzel")
 	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class30048])
 	(Precio 15.0)
 	(TipoPlato "Carne"))
 
@@ -1118,6 +1125,7 @@
 	(LugarPlato "Alemania")
 	(Nombre "Sauerkraut")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30049])
 	(Precio 12.0)
 	(Vegetariano TRUE))
 
@@ -1231,6 +1239,7 @@
 	(LugarPlato "España")
 	(Nombre "Arroz caldoso de pescador")
 	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class30060])
 	(Precio 24.0)
 	(Sibarita FALSE)
 	(TipoPlato "Pescado"))
@@ -1569,6 +1578,50 @@
 	(Alcoholica TRUE)
 	(Nombre "Tenuta di Petrolo Inarno (Lambrusco, D.O. Italia)")
 	(Precio 11.95))
+
+([Catering_Class40063] of  Bebida
+
+	(Nombre "Agua del grifo")
+	(Precio 0.0))
+
+([Catering_Class40064] of  Plato
+
+	(BebidaAsociada [Catering_Class40049])
+	(Clasico TRUE)
+	(Estacion Otono Invierno Primavera Verano)
+	(Ligero TRUE)
+	(LugarPlato "Francia")
+	(Nombre "Milhojas de fresitas")
+	(OrdenPlato Postre)
+	(Precio 18.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class40065] of  Plato
+
+	(BebidaAsociada [Catering_Class40059])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Galicia")
+	(Nombre "Queso tetilla con membrillo")
+	(OrdenPlato Postre)
+	(Precio 25.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class40066] of  Plato
+
+	(BebidaAsociada [Catering_Class40039])
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(LugarPlato "Estados Unidos")
+	(Nombre "Hamburgusa premium")
+	(OrdenPlato Segundo Primero)
+	(PlatosNoCompatibles [Catering_Class40066])
+	(Precio 20.0)
+	(Sibarita TRUE))
 
 ([Catering_Class5] of  Plato
 
