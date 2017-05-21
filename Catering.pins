@@ -1,4 +1,4 @@
-; Sun May 21 17:39:34 CEST 2017
+; Sun May 21 20:02:38 CEST 2017
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -1664,7 +1664,7 @@
 
 ([Catering_Class40066] of  Plato
 
-	(BebidaAsociada [Catering_Class40039])
+	(BebidaAsociada [Catering_Class40029])
 	(Caliente TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero FALSE)
@@ -1813,6 +1813,7 @@
 
 ([Catering_Class50014] of  Plato
 
+	(BebidaAsociada [Catering_Class30002])
 	(Clasico TRUE)
 	(Estacion Verano Primavera Otono Invierno)
 	(Ligero TRUE)
@@ -1915,6 +1916,7 @@
 
 ([Catering_Class50022] of  Plato
 
+	(BebidaAsociada [Catering_Class30002])
 	(Estacion Primavera Verano Invierno Otono)
 	(Ligero TRUE)
 	(LugarPlato "Grecia")
@@ -2032,6 +2034,7 @@
 
 ([Catering_Class50032] of  Plato
 
+	(BebidaAsociada [Catering_Class30002])
 	(Caliente TRUE)
 	(Estacion Invierno Otono Verano Primavera)
 	(LugarPlato "Japon")
