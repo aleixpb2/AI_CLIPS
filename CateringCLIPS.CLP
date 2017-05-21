@@ -1,5 +1,10 @@
-; Sun May 21 11:56:58 CEST 2017
-;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ONTOLOGIA
+
+
+
+; Sun May 21 16:25:30 CEST 2017
+; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
@@ -144,24 +149,24 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Complejo
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(multislot Estacion
 		(type SYMBOL)
 		(allowed-values Primavera Verano Otono Invierno)
 		(cardinality 1 4)
 		(create-accessor read-write))
-	(single-slot TipoPlato
-;+		(comment "Por ahora no requerido")
-		(type STRING)
+	(single-slot Complejo
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot PlatosNoCompatibles
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
+		(create-accessor read-write))
+	(single-slot TipoPlato
+;+		(comment "Por ahora no requerido")
+		(type STRING)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Ligero
 		(type SYMBOL)
@@ -178,21 +183,21 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Nombre
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(multislot BebidasNoCompatibles
 		(type INSTANCE)
 ;+		(allowed-classes Bebida)
 		(create-accessor read-write))
-	(single-slot Clasico
-;+		(comment "Clasico/Moderno")
+	(single-slot Nombre
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Sibarita
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Sibarita
+	(single-slot Clasico
+;+		(comment "Clasico/Moderno")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
@@ -216,12 +221,12 @@
 (defclass Bebida
 	(is-a USER)
 	(role concrete)
-	(single-slot Precio
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot Nombre
 		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Precio
+		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Alcoholica
@@ -235,8 +240,8 @@
 (definstances instancias
 
 
-; Sun May 21 11:56:58 CEST 2017
-;
+; Sun May 21 16:25:30 CEST 2017
+; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
@@ -244,13 +249,13 @@
 
 	(Alcoholica TRUE)
 	(Nombre "Vol d'Anima de Raimat (Vino blanco, D.O. Costers del Segre)")
-	(Precio 15.9))
+	(Precio 1.6))
 
 ([Catering_Class1] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Camino del puerto (Vino blanco, D.O. Rueda)")
-	(Precio 13.9))
+	(Precio 1.35))
 
 ([Catering_Class10000] of  Plato
 
@@ -270,7 +275,7 @@
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
-	(LugarPlato "España")
+	(LugarPlato "Espanya")
 	(Nombre "Tortilla de patatas")
 	(OrdenPlato Segundo)
 	(Precio 6.0)
@@ -319,6 +324,7 @@
 	(Complejo TRUE)
 	(Estacion Verano Primavera Otono Invierno)
 	(Ligero FALSE)
+	(LugarPlato "Estados Unidos")
 	(Nombre "Pastel de queso")
 	(OrdenPlato Postre)
 	(Precio 9.0)
@@ -422,7 +428,7 @@
 	(BebidaAsociada [Catering_Class40023])
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
-	(Nombre "Melocotón en almíbar")
+	(Nombre "Melocoton en almibar")
 	(OrdenPlato Postre)
 	(Precio 5.0))
 
@@ -448,7 +454,7 @@
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "India")
-	(Nombre "Pollo al cury")
+	(Nombre "Pollo al curry")
 	(OrdenPlato Segundo)
 	(PlatosNoCompatibles [Catering_Class20007])
 	(Precio 10.0)
@@ -514,7 +520,7 @@
 
 	(Alcoholica TRUE)
 	(Nombre "Raimat Chardonnay (Cava, D.O. Catalunya)")
-	(Precio 18.2))
+	(Precio 1.85))
 
 ([Catering_Class20015] of  Bebida
 
@@ -560,8 +566,8 @@
 	(Clasico TRUE)
 	(Estacion Primavera Verano)
 	(Ligero TRUE)
-	(LugarPlato "España")
-	(Nombre "Melón con jamon")
+	(LugarPlato "Espanya")
+	(Nombre "Melon con jamon")
 	(OrdenPlato Primero)
 	(Precio 5.0))
 
@@ -608,7 +614,7 @@
 	(Nombre "Lentejas estofadas")
 	(OrdenPlato Primero)
 	(Precio 8.0)
-	(TipoPlato "Estafado")
+	(TipoPlato "Estofado")
 	(Vegetariano TRUE))
 
 ([Catering_Class20025] of  Plato
@@ -657,6 +663,7 @@
 	(Caliente FALSE)
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
+	(LugarPlato "Estados Unidos")
 	(Nombre "Nuggets de pollo")
 	(OrdenPlato Segundo)
 	(Precio 5.0))
@@ -729,7 +736,7 @@
 	(Caliente TRUE)
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
-	(Nombre "Salmón con patatas")
+	(Nombre "Salmon con patatas")
 	(OrdenPlato Segundo)
 	(PlatosNoCompatibles [Catering_Class20035])
 	(Precio 18.0)
@@ -792,7 +799,7 @@
 
 	(Alcoholica TRUE)
 	(Nombre "Taittinger Brut Réserve (Champagne, D.O. Reims)")
-	(Precio 52.2))
+	(Precio 5.2))
 
 ([Catering_Class20041] of  Bebida
 
@@ -873,37 +880,37 @@
 
 	(Alcoholica TRUE)
 	(Nombre "A Punt (Vino blanco, Mallorca)")
-	(Precio 14.2))
+	(Precio 2.2))
 
 ([Catering_Class30003] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Four Lines (Vino blanco, D.O. Rueda)")
-	(Precio 10.0))
+	(Precio 1.0))
 
 ([Catering_Class30004] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Cèrvoles Colors (Vino tinto, D.O. Costers del Segre)")
-	(Precio 16.7))
+	(Precio 2.0))
 
 ([Catering_Class30005] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Chivite Las Fincas Lias (Vino rosado, Tierra Protegida de las Tres Riberas)")
-	(Precio 19.5))
+	(Precio 3.0))
 
 ([Catering_Class30006] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Gran Feudo Edicion Roble (Vino tinto, D.O. Ribera del Duero)")
-	(Precio 17.25))
+	(Precio 1.75))
 
 ([Catering_Class30007] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Viña Salceda Reserva (Vino tinto, D.O.C. Rioja)")
-	(Precio 23.3))
+	(Precio 2.35))
 
 ([Catering_Class30008] of  Bebida
 
@@ -924,25 +931,25 @@
 
 	(Alcoholica TRUE)
 	(Nombre "Anna de Codorniu Blanc de Blancs (Cava)")
-	(Precio 15.35))
+	(Precio 1.9))
 
 ([Catering_Class30012] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Viña Sol (Vino tinto, D.O. Rioja)")
-	(Precio 12.2))
+	(Precio 1.25))
 
 ([Catering_Class30013] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Sangría (Vino tinto)")
-	(Precio 6.0))
+	(Precio 1.0))
 
 ([Catering_Class30014] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Sangría (Cava)")
-	(Precio 8.0))
+	(Precio 1.5))
 
 ([Catering_Class30015] of  Bebida
 
@@ -958,19 +965,19 @@
 
 	(Alcoholica TRUE)
 	(Nombre "Vega Sicilia \"Único\" (Vino tinto, D.O. Rioja)")
-	(Precio 220.0))
+	(Precio 9.0))
 
 ([Catering_Class30018] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Finc Dofi (Vino tinto, D.O.Q. Priorat)")
-	(Precio 82.5))
+	(Precio 8.2))
 
 ([Catering_Class30019] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Taittinger Brut Prestige Rosé (Champagne rosado, D.O. Reims)")
-	(Precio 46.3))
+	(Precio 4.6))
 
 ([Catering_Class30020] of  Plato
 
@@ -978,8 +985,8 @@
 	(Complejo TRUE)
 	(Estacion Primavera Verano)
 	(Ligero TRUE)
-	(LugarPlato "España")
-	(Nombre "Salpicón de bogavante")
+	(LugarPlato "Españnya")
+	(Nombre "Salpicon de bogavante")
 	(OrdenPlato Primero)
 	(Precio 42.2)
 	(Sibarita TRUE)
@@ -1160,7 +1167,7 @@
 	(Estacion Otono Invierno)
 	(Ligero TRUE)
 	(LugarPlato "Galicia")
-	(Nombre "Zamburiñas al horno")
+	(Nombre "Zamburinyas al horno")
 	(OrdenPlato Segundo)
 	(Precio 14.0)
 	(Sibarita TRUE)
@@ -1209,8 +1216,8 @@
 	(Clasico FALSE)
 	(Complejo TRUE)
 	(Estacion Verano Primavera Otono Invierno)
-	(LugarPlato "Japón")
-	(Nombre "Tataki de atún con salmorejo")
+	(LugarPlato "Japon")
+	(Nombre "Tataki de atun con salmorejo")
 	(OrdenPlato Segundo)
 	(Precio 17.0)
 	(Sibarita TRUE)
@@ -1222,7 +1229,7 @@
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
 	(LugarPlato "Japon")
-	(Nombre "Tartar de atún con aguacate")
+	(Nombre "Tartar de atun con aguacate")
 	(OrdenPlato Primero Segundo)
 	(PlatosNoCompatibles [Catering_Class30039])
 	(Precio 14.0)
@@ -1374,7 +1381,7 @@
 	(Complejo TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(LugarPlato "Francia")
-	(Nombre "Ragoût")
+	(Nombre "Ragout")
 	(OrdenPlato Segundo)
 	(Precio 12.0)
 	(Sibarita TRUE)
@@ -1400,7 +1407,7 @@
 	(Estacion Primavera Verano Invierno Otono)
 	(Ligero TRUE)
 	(LugarPlato "Japon")
-	(Nombre "Salmón teriyaki")
+	(Nombre "Salmon teriyaki")
 	(OrdenPlato Segundo)
 	(Precio 18.0)
 	(Sibarita TRUE)
@@ -1437,7 +1444,7 @@
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
 	(LugarPlato "Galicia")
-	(Nombre "Cañaillas")
+	(Nombre "Canyaillas")
 	(OrdenPlato Primero)
 	(Precio 18.0)
 	(Sibarita TRUE)
@@ -1449,6 +1456,7 @@
 	(Clasico TRUE)
 	(Estacion Primavera Verano Otono Invierno)
 	(Ligero TRUE)
+	(LugarPlato "Catalunya")
 	(Nombre "Cebolla de Figueres \"al cop de puny\" con tomate y olivas")
 	(OrdenPlato Primero)
 	(Precio 12.0)
@@ -1458,7 +1466,7 @@
 
 	(Alcoholica TRUE)
 	(Nombre "Mojito (Cocktail)")
-	(Precio 10.0))
+	(Precio 2.0))
 
 ([Catering_Class30058] of  Bebida
 
@@ -1481,209 +1489,258 @@
 	(Sibarita FALSE)
 	(TipoPlato "Pescado"))
 
+([Catering_Class40000] of  Plato
+
+	(BebidaAsociada [Catering_Class40049])
+	(Clasico FALSE)
+	(Estacion Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Pinya Natural")
+	(OrdenPlato Postre)
+	(Precio 3.5)
+	(Vegetariano TRUE))
+
+([Catering_Class40001] of  Plato
+
+	(BebidaAsociada [Catering_Class40061])
+	(Complejo TRUE)
+	(Estacion Verano Primavera Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Sopa de frutos del bosque con helado de yogurt")
+	(OrdenPlato Postre)
+	(Precio 3.0)
+	(Sibarita TRUE)
+	(TipoPlato "Sopa")
+	(Vegetariano TRUE))
+
+([Catering_Class40002] of  Plato
+
+	(BebidaAsociada [Catering_Class30003])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Catalunya")
+	(Nombre "Crema catalana")
+	(OrdenPlato Postre)
+	(Precio 2.0)
+	(Vegetariano FALSE))
+
+([Catering_Class40003] of  Plato
+
+	(BebidaAsociada [Catering_Class40051])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Francia")
+	(Nombre "Mousse de chocolate")
+	(OrdenPlato Postre)
+	(Precio 4.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
 ([Catering_Class40004] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Javier Sanz (Vino blanco, D.O. Rueda)")
-	(Precio 16.0))
+	(Precio 1.6))
 
 ([Catering_Class40005] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Fanomenal (Vino blanco, D.O. Rueda)")
-	(Precio 15.6))
+	(Precio 1.55))
 
 ([Catering_Class40006] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Viña El Torreón (Vino blanco, D.O. Rueda)")
-	(Precio 11.3))
+	(Precio 1.25))
 
 ([Catering_Class40007] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Pedalier (Vino blanco, D.O. Rías Baixas)")
-	(Precio 13.0))
+	(Precio 1.3))
 
 ([Catering_Class40008] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Marieta  (Vino blanco, D.O. Rías Baixas)")
-	(Precio 13.1))
+	(Precio 1.35))
 
 ([Catering_Class40010] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "La Trucha (Vino blanco, D.O. Rías Baixas)")
-	(Precio 14.6))
+	(Precio 1.45))
 
 ([Catering_Class40011] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Finca Fabián  (Vino blanco, D.O. La Mancha)")
-	(Precio 13.5))
+	(Precio 1.35))
 
 ([Catering_Class40012] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Finca Fabián  (Vino rosado, D.O. La Mancha)")
-	(Precio 13.2))
+	(Precio 1.32))
 
 ([Catering_Class40013] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Libido (Vino rosado, D.O. Navarra)")
-	(Precio 13.4))
+	(Precio 1.35))
 
 ([Catering_Class40014] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Sierra Cantabria (Vino rosado, D.O. La Rioja)")
-	(Precio 11.1))
+	(Precio 1.2))
 
 ([Catering_Class40015] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Pere Ventura Cupatge d'Honor Rosé (Cava, D.O. Valencia)")
-	(Precio 24.0))
+	(Precio 2.4))
 
 ([Catering_Class40016] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Ses Nines (Vino tinto, D.O. Binissalem, Mallorca)")
-	(Precio 16.0))
+	(Precio 1.6))
 
 ([Catering_Class40017] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Butibalausí (Vino tinto, V.T. Mallorca)")
-	(Precio 14.2))
+	(Precio 1.8))
 
 ([Catering_Class40018] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "8 Vents (Vino tinto, V.T. Mallorca)")
-	(Precio 20.0))
+	(Precio 3.5))
 
 ([Catering_Class40019] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "XIII Lunas Crianza (Vino tinto,D.O. La Mancha)")
-	(Precio 11.5))
+	(Precio 1.2))
 
 ([Catering_Class40020] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Bicicletas y Demonios (Vino tinto, D.O. Ribera del Duero)")
-	(Precio 11.2))
+	(Precio 2.4))
 
 ([Catering_Class40021] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Dominio de Atauta (Vino tinto, D.O. Ribera del Duero)")
-	(Precio 29.0))
+	(Precio 2.9))
 
 ([Catering_Class40022] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Carmelo Rodero 9 meses (Vino tinto, D.O. Ribera del Duero)")
-	(Precio 18.5))
+	(Precio 1.85))
 
 ([Catering_Class40023] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Cyan Roble (Vino tinto, D.O. Toro)")
-	(Precio 16.0))
+	(Precio 1.6))
 
 ([Catering_Class40024] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "El Pícaro (Vino tinto, D.O. Toro)")
-	(Precio 16.2))
+	(Precio 1.65))
 
 ([Catering_Class40025] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Glorioso Crianza (Vino tinto, D.O. La Rioja)")
-	(Precio 18.0))
+	(Precio 1.8))
 
 ([Catering_Class40026] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Ramón Bilbao Edicion Limitada (Vino tinto, D.O. La Rioja)")
-	(Precio 21.0))
+	(Precio 2.1))
 
 ([Catering_Class40027] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Carlos Martínez (Vino tinto, D.O. La Rioja)")
-	(Precio 16.7))
+	(Precio 1.68))
 
 ([Catering_Class40028] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Juan Gil 12 meses (Vino tinto, D.O. Jumilla)")
-	(Precio 22.0))
+	(Precio 2.2))
 
 ([Catering_Class40029] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Alto Moncayo (Vino tinto, D.O. Campo de Borja)")
-	(Precio 40.0))
+	(Precio 6.0))
 
 ([Catering_Class40030] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Les Terrases (Vino tinto, D.O. Priorat)")
-	(Precio 35.0))
+	(Precio 3.5))
 
 ([Catering_Class40031] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Inici (Vino tinto, D.O. Priorat)")
-	(Precio 26.0))
+	(Precio 2.6))
 
 ([Catering_Class40032] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Finca la Cuesta (Vino tinto, D.O. Bierzo)")
-	(Precio 17.9))
+	(Precio 1.75))
 
 ([Catering_Class40033] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Ermita d'Espiells (Vino blanco, D.O. Penedès)")
-	(Precio 8.0))
+	(Precio 1.0))
 
 ([Catering_Class40034] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Moustillant (Vino blanco, D.O. Penedes)")
-	(Precio 8.0))
+	(Precio 1.0))
 
 ([Catering_Class40035] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Masia Bach Estrissimo (Vino blanco, D.O. Catalunya)")
-	(Precio 19.0))
+	(Precio 1.9))
 
 ([Catering_Class40036] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Galets Rouges (Vino tinto, D.O. Francia)")
-	(Precio 18.0))
+	(Precio 1.8))
 
 ([Catering_Class40037] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Chateau Montelena Estate (Vino tinto, D.O. California)")
-	(Precio 26.0))
+	(Precio 4.0))
 
 ([Catering_Class40038] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Araujo Eisele Vineyard (Vino tinto, D.O. California)")
-	(Precio 25.0))
+	(Precio 4.0))
 
 ([Catering_Class40039] of  Bebida
 
@@ -1694,19 +1751,19 @@
 
 	(Alcoholica TRUE)
 	(Nombre "Santa Digna (Vino rosado, D.O. Valle Central)")
-	(Precio 7.9))
+	(Precio 1.5))
 
 ([Catering_Class40041] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Santa Digna (Vino blanco, D.O. Valle Central)")
-	(Precio 7.5))
+	(Precio 1.2))
 
 ([Catering_Class40042] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Castell d'Encús SO2 (Vino blanc, D.O. Costers del Segre)")
-	(Precio 21.3))
+	(Precio 2.1))
 
 ([Catering_Class40044] of  Bebida
 
@@ -1724,97 +1781,97 @@
 
 	(Alcoholica TRUE)
 	(Nombre "Castillo Perelada (Vino blanco, D.O. Empordà)")
-	(Precio 5.8))
+	(Precio 1.0))
 
 ([Catering_Class40047] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Sumarroca (Vino rosado, D.O. Catalunya)")
-	(Precio 5.2))
+	(Precio 1.5))
 
 ([Catering_Class40048] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Sumarroca Blanc de Blancs (Vino blanco, D.O. Penedès)")
-	(Precio 4.25))
+	(Precio 1.8))
 
 ([Catering_Class40049] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Babot Brut Nature (Cava, D.O. Catalunya)")
-	(Precio 5.1))
+	(Precio 1.2))
 
 ([Catering_Class40050] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Josep Foraster Els Nanos Collita (Vino tinto, D.O. Conca de Barberà)")
-	(Precio 6.2))
+	(Precio 1.2))
 
 ([Catering_Class40051] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Castillo de Monjardín Garnacha Viñas Viejas (Vino tinto, D.O. Navarra)")
-	(Precio 6.5))
+	(Precio 1.1))
 
 ([Catering_Class40052] of  Bebida
 
 	(Alcoholica FALSE)
 	(Nombre "Castell del Remei Punt Zero (Vino tinto, D.O. Costers del Segre)")
-	(Precio 7.2))
+	(Precio 1.7))
 
 ([Catering_Class40053] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Llopart Brut Rosé Reserva (Cava rosado, D.O. Catalunya)")
-	(Precio 7.0))
+	(Precio 1.2))
 
 ([Catering_Class40054] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Llopart Brut Reserva (Cava, D.O. Catalunya)")
-	(Precio 9.0))
+	(Precio 1.2))
 
 ([Catering_Class40055] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Lorenzo Cachazo Martivillí (Vino blanco, D.O. Rueda)")
-	(Precio 7.5))
+	(Precio 1.2))
 
 ([Catering_Class40056] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Parés Baltà Honeymoon (Vino blanco, D.O. Penedès)")
-	(Precio 7.05))
+	(Precio 1.0))
 
 ([Catering_Class40057] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Domaene Gobelsburg Niederösterreich Zweigelt (Vino tinto, D.O. Kamptal)")
-	(Precio 8.95))
+	(Precio 1.6))
 
 ([Catering_Class40058] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "El Xitxarel·lo (Vino blanco, D.O. Penedès)")
-	(Precio 8.95))
+	(Precio 1.8))
 
 ([Catering_Class40059] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Pizzolato Prosecco Treviso (Prosecco, D.O. Veneto)")
-	(Precio 9.95))
+	(Precio 1.5))
 
 ([Catering_Class40060] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Perlino Fragolino Rosso (Lambrusco, D.O. Italia)")
-	(Precio 4.95))
+	(Precio 0.8))
 
 ([Catering_Class40061] of  Bebida
 
 	(Alcoholica TRUE)
 	(Nombre "Tenuta di Petrolo Inarno (Lambrusco, D.O. Italia)")
-	(Precio 11.95))
+	(Precio 1.3))
 
 ([Catering_Class40063] of  Bebida
 
@@ -1828,7 +1885,7 @@
 	(Estacion Otono Invierno Primavera Verano)
 	(Ligero TRUE)
 	(LugarPlato "Francia")
-	(Nombre "Milhojas de fresitas")
+	(Nombre "Milhojas de fresitas con nata")
 	(OrdenPlato Postre)
 	(Precio 18.0)
 	(Sibarita TRUE)
@@ -1870,6 +1927,424 @@
 	(OrdenPlato Segundo)
 	(Precio 17.0)
 	(TipoPlato "Carne"))
+
+([Catering_Class50004] of  Plato
+
+	(BebidaAsociada [Catering_Class40024])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Catalunya")
+	(Nombre "Carquinyolis con moscatel")
+	(OrdenPlato Postre)
+	(Precio 3.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50005] of  Plato
+
+	(BebidaAsociada [Catering_Class40042])
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Nombre "Pastel de yema y frutas")
+	(OrdenPlato Postre)
+	(Precio 6.0)
+	(Sibarita TRUE)
+	(TipoPlato "Pastel")
+	(Vegetariano FALSE))
+
+([Catering_Class50006] of  Plato
+
+	(BebidaAsociada [Catering_Class40053])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Brazo de gitano de nata con fresitas")
+	(OrdenPlato Postre)
+	(Precio 5.0))
+
+([Catering_Class50007] of  Plato
+
+	(BebidaAsociada [Catering_Class20040])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(LugarPlato "Espanya")
+	(Nombre "Profiteroles con chocolate caliente")
+	(OrdenPlato Postre)
+	(Precio 5.0))
+
+([Catering_Class50008] of  Plato
+
+	(BebidaAsociada [Catering_Class40054])
+	(Clasico TRUE)
+	(Estacion Primavera Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Castilla La Mancha")
+	(Nombre "Queso manchego seco")
+	(OrdenPlato Postre)
+	(Precio 8.0)
+	(Sibarita TRUE))
+
+([Catering_Class50009] of  Plato
+
+	(BebidaAsociada [Catering_Class40014])
+	(Clasico TRUE)
+	(Estacion Verano Primavera Otono Invierno)
+	(Ligero TRUE)
+	(Nombre "Trufas heladas")
+	(OrdenPlato Postre)
+	(Precio 9.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50010] of  Plato
+
+	(BebidaAsociada [Catering_Class40051])
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(LugarPlato "Catalunya")
+	(Nombre "Recuit de drap de Fonteta")
+	(OrdenPlato Postre)
+	(Precio 9.0)
+	(Sibarita TRUE))
+
+([Catering_Class50011] of  Plato
+
+	(BebidaAsociada [Catering_Class40049])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Catalunya")
+	(Nombre "Postre de musico con vino rancio")
+	(OrdenPlato Postre)
+	(Precio 7.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50012] of  Plato
+
+	(BebidaAsociada [Catering_Class40050])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Francia")
+	(Nombre "Canyas rellenas de crema")
+	(OrdenPlato Postre)
+	(Precio 5.0)
+	(Sibarita TRUE))
+
+([Catering_Class50013] of  Plato
+
+	(BebidaAsociada [Catering_Class40017])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Estados Unidos")
+	(Nombre "Brownie de la casa con bombón de chocolate")
+	(OrdenPlato Postre)
+	(Precio 10.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50014] of  Plato
+
+	(Clasico TRUE)
+	(Estacion Verano Primavera Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Catalunya")
+	(Nombre "Roscon de nata o cabello de angel")
+	(OrdenPlato Postre)
+	(Precio 12.0)
+	(Sibarita TRUE))
+
+([Catering_Class50015] of  Plato
+
+	(BebidaAsociada [Catering_Class20040])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Galicia")
+	(Nombre "Ostras vivas")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class50015])
+	(Precio 25.0)
+	(Sibarita TRUE)
+	(TipoPlato "Marisco"))
+
+([Catering_Class50016] of  Plato
+
+	(BebidaAsociada [Catering_Class30019])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Galicia")
+	(Nombre "Almejas de Carril vivas")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class50016])
+	(Precio 22.0)
+	(Sibarita TRUE))
+
+([Catering_Class50017] of  Plato
+
+	(BebidaAsociada [Catering_Class40044])
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Estados Unidos")
+	(Nombre "Mac & Cheese")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class50017])
+	(Precio 7.0)
+	(Vegetariano TRUE))
+
+([Catering_Class50018] of  Plato
+
+	(BebidaAsociada [Catering_Class40005])
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Otono)
+	(Ligero TRUE)
+	(LugarPlato "Turquia")
+	(Nombre "Falafel")
+	(OrdenPlato Segundo)
+	(Precio 6.0)
+	(Vegetariano TRUE))
+
+([Catering_Class50019] of  Plato
+
+	(BebidaAsociada [Catering_Class30002])
+	(Caliente FALSE)
+	(Estacion Primavera Otono Verano Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Marruecos")
+	(Nombre "Taboule")
+	(OrdenPlato Primero)
+	(Precio 10.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50020] of  Plato
+
+	(BebidaAsociada [Catering_Class40044])
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Arabia Saudi")
+	(Nombre "Baba Ghanoush")
+	(OrdenPlato Primero)
+	(Precio 12.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50021] of  Plato
+
+	(BebidaAsociada [Catering_Class40058])
+	(Clasico FALSE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Grecia")
+	(Nombre "Tzaziki")
+	(OrdenPlato Primero)
+	(Precio 10.0)
+	(Sibarita TRUE)
+	(TipoPlato "Sopa")
+	(Vegetariano TRUE))
+
+([Catering_Class50022] of  Plato
+
+	(Estacion Primavera Verano Invierno Otono)
+	(Ligero TRUE)
+	(LugarPlato "Grecia")
+	(Nombre "Dolmades")
+	(OrdenPlato Primero)
+	(Precio 8.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50023] of  Plato
+
+	(BebidaAsociada [Catering_Class40012])
+	(Caliente TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(LugarPlato "Mejicana")
+	(Nombre "Burrito  de pollo")
+	(OrdenPlato Segundo)
+	(Precio 8.0))
+
+([Catering_Class50024] of  Plato
+
+	(BebidaAsociada [Catering_Class40029])
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Siria")
+	(Nombre "Hummus")
+	(OrdenPlato Primero)
+	(Precio 9.0)
+	(Sibarita FALSE)
+	(Vegetariano TRUE))
+
+([Catering_Class50025] of  Plato
+
+	(BebidaAsociada [Catering_Class40018])
+	(Caliente TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Italia")
+	(Nombre "Melanzane alla parmigiana")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class50025])
+	(Precio 11.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50027] of  Plato
+
+	(BebidaAsociada [Catering_Class30018])
+	(Clasico TRUE)
+	(Estacion Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Mejicano")
+	(Nombre "Guacamole con totopos")
+	(OrdenPlato Primero)
+	(Precio 14.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50028] of  Plato
+
+	(BebidaAsociada [Catering_Class40049])
+	(Caliente FALSE)
+	(Estacion Primavera Verano)
+	(Ligero TRUE)
+	(LugarPlato "Polonia")
+	(Nombre "Borsch (Frio)")
+	(OrdenPlato Primero)
+	(Precio 8.0)
+	(Sibarita TRUE)
+	(TipoPlato "Sopa")
+	(Vegetariano TRUE))
+
+([Catering_Class50029] of  Plato
+
+	(BebidaAsociada [Catering_Class40049])
+	(Caliente TRUE)
+	(Estacion Invierno Otono)
+	(Ligero TRUE)
+	(LugarPlato "Polonia")
+	(Nombre "Borsch (Caliente)")
+	(OrdenPlato Primero)
+	(Precio 8.0)
+	(Sibarita TRUE)
+	(TipoPlato "Sopa")
+	(Vegetariano TRUE))
+
+([Catering_Class50030] of  Plato
+
+	(BebidaAsociada [Catering_Class40033])
+	(Caliente TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Otono Invierno)
+	(LugarPlato "Japon")
+	(Nombre "Estofado de coliflor con edamame")
+	(OrdenPlato Primero)
+	(Precio 10.0)
+	(TipoPlato "Estofado")
+	(Vegetariano TRUE))
+
+([Catering_Class50031] of  Plato
+
+	(BebidaAsociada [Catering_Class40035])
+	(Caliente TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(LugarPlato "Espanya")
+	(Nombre "Albondigas de berenjena")
+	(OrdenPlato Primero)
+	(Precio 7.0)
+	(Vegetariano TRUE))
+
+([Catering_Class50032] of  Plato
+
+	(Caliente TRUE)
+	(Estacion Invierno Otono Verano Primavera)
+	(LugarPlato "Japon")
+	(Nombre "Nasu Koroke")
+	(OrdenPlato Segundo)
+	(Precio 11.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50033] of  Plato
+
+	(BebidaAsociada [Catering_Class40023])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Complejo FALSE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(LugarPlato "Japon")
+	(Nombre "Oyakodon")
+	(OrdenPlato Segundo)
+	(Precio 8.0))
+
+([Catering_Class50034] of  Plato
+
+	(BebidaAsociada [Catering_Class30003])
+	(Estacion Verano Primavera)
+	(Ligero TRUE)
+	(LugarPlato "Japon")
+	(Nombre "Zarusoba")
+	(OrdenPlato Segundo)
+	(Precio 14.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
+
+([Catering_Class50035] of  Plato
+
+	(BebidaAsociada [Catering_Class40057])
+	(Caliente TRUE)
+	(Clasico TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Japon")
+	(Nombre "Yakisoba")
+	(OrdenPlato Primero)
+	(Precio 9.0))
+
+([Catering_Class50036] of  Plato
+
+	(BebidaAsociada [Catering_Class40017])
+	(Caliente TRUE)
+	(Complejo TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero FALSE)
+	(LugarPlato "Japon")
+	(Nombre "Okonomiyaki (estilo Hiroshima)")
+	(OrdenPlato Primero Segundo)
+	(PlatosNoCompatibles [Catering_Class50036])
+	(Precio 14.0))
+
+([Catering_Class50037] of  Plato
+
+	(BebidaAsociada [Catering_Class40008])
+	(Caliente TRUE)
+	(Estacion Primavera Verano Otono Invierno)
+	(Ligero TRUE)
+	(LugarPlato "Japon")
+	(Nombre "Nasu Dengaku")
+	(OrdenPlato Segundo)
+	(Precio 16.0)
+	(Sibarita TRUE)
+	(Vegetariano TRUE))
 
 ([Catering_Class6] of  Plato
 
@@ -1920,6 +2395,7 @@
 	(OrdenPlato Primero)
 	(Precio 6.0)
 	(Vegetariano TRUE))
+
 
 
 
